@@ -1,0 +1,75 @@
+﻿@using JiGuangLinXin.App.Provide.JsonHelper
+@{
+    ViewBag.ParentUrl = "/Film/Index";
+    ViewBag.Title = "邻信电影季-楼盘中奖统计";
+    List<dynamic> vm = JsonSerialize.Instance.JsonToObject<List<dynamic>>(ViewBag.jsonStr); //Model.vmList as PagedList<object>;  
+    PagedList<dynamic> pagedList = ViewBag.vmObj;
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">控制台</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">小区楼盘的用户中奖记录统计，给运营人员提供数据参考，比如：满500人在小区再搞活动</a>
+            </h4>
+            <div class="hr hr-18 dotted hr-double"></div>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                <form class="form-search">
+                    <span class="">
+                        <input type="text" placeholder="小区名 关键字搜索" class="nav-search-input col-xs-10 col-sm-5" style="width: 280px;" id="key" name="key" value="@Request.QueryString["key"]">
+                    </span>
+                    <button type="submit" class="btn btn-info btn-xs">
+                        <i class="ace-icon fa fa-search bigger-110"></i>
+                        搜索
+                    </button>
+                </form>
+            </div><!-- #nav-search -->
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>楼盘名</th>
+                        <th>电影票/金额</th>
+                        <th>业主卡/金额</th>
+                        <th>红包/金额</th>
+                        <th>参与总人次</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in vm)
+                    {
+                        <tr>
+                            <td>@obj.bname</td>
+                            <td>@obj.filmCount / @obj.filmTotal</td>
+                            <td>@obj.cardCount / @obj.cardTotal</td>
+                            <td>@obj.luckyCount / @obj.luckyTotal</td>
+                            <td>@obj.count</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" href="/Film/?key=@obj.bid"  data- title="查看中奖详情">
+                                        查看中奖详情
+                                        <i class="ace-icon fa fa-comment bigger-120"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div> 
+    @Html.Pager(pagedList, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "pn", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row --> 

@@ -1,0 +1,109 @@
+﻿@model PagedList<Core_Feedback>
+@{
+    ViewBag.ParentUrl = "/Feedback/Complaint";
+    ViewBag.Title = "用户投诉举报";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">用户投诉、举报信息；非常重要，请相关人员及时处理</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>手机号</th>
+                        <th>内容</th>
+                        <th>回复</th>
+                        <th>状态</th>
+                        <th>举报时间</th>
+                        <th>回复时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.F_Phone</td>
+                            <td>@obj.F_Content</td>
+                            <td>@obj.F_Reply</td>
+                            <td>@UtilPartialView.YesOrNo("已回复", "未回复", obj.F_Status== 0)</td>
+                            <td>@obj.F_Time</td>
+                            <td>@obj.F_ReplyTime</td>
+                            <td>
+                                @if (obj.F_Status == 0)
+                                {<div class="btn-group">
+                                     <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" href="###" name="reply" data-val="@obj.F_Id" title="回复投诉">
+                                         立即回复
+                                         <i class="ace-icon fa fa-edit bigger-120"></i>
+                                     </a>
+                                </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" href="###" name="query" data-reply="@obj.F_Reply" data-time="@obj.F_ReplyTime" title="查看回复">
+                                            查看回复
+                                            <i class="ace-icon fa fa-comment bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }
+                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>      
+      @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "pn", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+<script>
+    $(function () {
+        //回复用户投诉
+        $("a[name='reply']").on('click', function () {
+            var curEle = $(this);
+            bootbox.prompt("回复用户投诉" , function (rs) {
+                if (rs) {
+                    var sid = curEle.data('val');
+                    //console.log(sid);
+                    $.post("/Feedback/Check", { id: sid, content: rs }, function (o) {
+                        bootbox.alert(o, function () {
+                            window.location.reload();
+                        });
+                    });
+                }
+            });
+        });
+
+        /*
+        *查看回复
+        */
+        $("a[name='query']").on('click', function () {
+            bootbox.alert('回复时间：' + $(this).data('time') + '<br/>回复内容:' + $(this).data('reply'), function () {
+            });
+        });
+
+    })
+    </script>
+}

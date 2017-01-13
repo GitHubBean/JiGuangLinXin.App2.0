@@ -1,0 +1,172 @@
+﻿@model PagedList<Core_AuditingGroupMananger>
+@{
+    ViewBag.ParentUrl = "/Check/GroupManager";
+    ViewBag.Title = "小区管理员申请认证";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">用户申请成为小区的管理员，每个小区只招募一名管理员！</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                <form class="form-search">
+                    <span class="">
+                        <input type="text" placeholder="用户昵称/电话号码/楼盘 关键字搜索" class="nav-search-input col-xs-10 col-sm-5" style="width: 280px;" id="key" name="key" value="@Request.QueryString["key"]">
+                    </span>
+                    <button type="submit" class="btn btn-info btn-xs">
+                        <i class="ace-icon fa fa-search bigger-110"></i>
+                        搜索
+                    </button>
+                </form>
+            </div><!-- #nav-search -->
+            @*<div class="nav-search" id="nav-search" style="top: 6px;">
+                    <form class="form-search">
+                        <span class="">
+                            <input type="text" placeholder="楼盘名" class="nav-search-input" id="key" name="key" value="@Request.QueryString["key"]">
+                        </span>
+                        <button type="submit" class="btn btn-info btn-xs">
+                            <i class="ace-icon fa fa-search bigger-110"></i>
+                            搜索
+                        </button>
+                        <a class="btn btn-xs btn-success" href="@Url.Action("BuildingEdit", "VillageBuilding")">
+                            <i class="icon-plus bigger-110"></i>
+                            新增楼盘
+                        </a>
+                    </form>
+                </div>*@<!-- #nav-search -->
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>真实姓名</th>
+                        <th>手机</th>
+                        <th>小区名</th>
+                        <th class="hidden-480">联系电话</th>
+                        <th>备注</th>
+                        <th>状态</th>
+                        <th class="hidden-480">申请时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.M_TrueName</td>
+                            <td>@obj.M_UPhone</td>
+                            <td>@obj.M_BuildingName</td>
+                            <td class="hidden-480">@obj.M_Phone</td>
+                            <td>
+                                @obj.M_Remark
+
+                            @if (!string.IsNullOrEmpty(obj.M_QQ))
+                            {
+                                <span class="label label-important">@obj.M_QQ</span>
+                            }
+                        </td>
+                        <td>
+                            @if (obj.M_Status == 1)
+                            {
+                                <span class="label label-success">认证成功</span>
+                            }
+                            else if (obj.M_Status == 2)
+                            {
+                                <span class="label label-danger">认证失败</span>
+                            }
+                            else
+                            {
+                                <span class="label label-primary">等待认证</span>
+                            }
+
+                            @*@Enum.GetName(typeof(AuditingEnum), obj.M_Status)*@
+                        </td>
+                        <td class="hidden-480">@obj.M_Time</td>
+
+                        <td>
+                            @if (obj.M_Status == (int)AuditingEnum.未认证)
+                            {
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-success tooltip-success" data-rel="tooltip" data-placement="top" title="通过审核" href="###" data-val="@obj.M_Id" onclick="oper('@obj.M_Id',1)">
+                                        通过
+                                        <i class="ace-icon glyphicon glyphicon-ok bigger-120"></i>
+                                    </a>
+                                    <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="审核不通过" href="###" data-val="@obj.M_Id" onclick="oper('@obj.M_Id',2)">
+                                        拒绝
+                                        <i class="ace-icon glyphicon glyphicon-remove bigger-120"></i>
+                                    </a>
+                                </div>
+                            }
+                            @*else if (obj.M_Status == (int)AuditingEnum.认证成功)
+                                {
+
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="撤销管理员" href="###" data-val="@obj.M_Id" onclick="oper('@obj.M_Id',0)">
+                                            立即撤销
+                                            <i class="ace-icon glyphicon glyphicon-ok bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }*@
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "id", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        function oper(id, state) {
+            var tips = '';
+            if (state == 2) { //拒绝
+
+                bootbox.prompt("拒绝管理员申请", function (rs) {
+                    if (rs) {
+                        tips = rs;
+
+                        $.post('/Check/GroupManagerAuditing', { id: id, state: state, tips: tips }, function (o) {
+                            if ('ok' == o) {
+                                bootbox.alert("操作成功！", function () {
+                                    //window.location.reload();
+                                    location.reload();
+                                });
+                            } else {
+                                bootbox.alert(o);
+                            }
+                        });
+                    }
+                });
+            } else {
+                $.post('/Check/GroupManagerAuditing', { id: id, state: state, tips: tips }, function (o) {
+                    if ('ok' == o) {
+                        bootbox.alert("操作成功！", function () {
+                            //window.location.reload();
+                            location.reload();
+                        });
+                    } else {
+                        bootbox.alert(o);
+                    }
+                });
+            }
+        }
+    </script>
+}

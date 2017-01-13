@@ -1,0 +1,121 @@
+﻿@model List<Core_BuidingCube>
+@{
+    ViewBag.ParentUrl = "/VillageBuilding/Building";
+    ViewBag.Title = "楼盘户型";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li>
+            <a href="/VillageBuilding/Building">所有楼盘</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                @ViewBag.HouseName
+                <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    全景看房
+                </small>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                <a class="btn btn-xs btn-success" href="@Url.Action("HouseTypeEdit", "VillageBuilding", new RouteValueDictionary() { { "buildingId", ViewBag.HouseId } })">
+                    <i class="icon-plus bigger-110"></i>
+                    新增户型
+                </a>
+            </div><!-- #nav-search -->
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="hidden-480">封面</th>
+                        <th>标题</th>
+                        <th class="hidden-480">简介</th>
+                        <th class="hidden-480">排序值</th>
+                        <th>状态</th>
+                        <th class="hidden-480">录入时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td class="hidden-480">
+                                <img alt="户型封面" width="36" src="@string.Format("/cache{0}",item.BC_CoverImg)">
+                            </td>
+                            <td>@item.BC_Title</td>
+                            <td class="hidden-480">@item.BC_Remark</td>
+                            <td class="hidden-480">@item.BC_Rank</td>
+                            <td>@UtilPartialView.YesOrNo("正常", "取消", item.BC_Status == 1)</td>
+                            <td class="hidden-480">2016-01-14 11:07:44</td>
+
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="编辑" href="/VillageBuilding/HouseTypeEdit/@item.BC_Id">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+
+                                    <a class="btn btn-xs btn-warning tooltip-warning" data-rel="tooltip" data-placement="top" title="全景图" href="/VillageBuilding/HouseTypeCube/@item.BC_Id?n=@item.BC_Title">
+                                        <i class="ace-icon fa fa-picture-o bigger-120"></i>
+                                    </a>
+
+                                    <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="删除" href="###" data-val="@item.BC_Id" name="btnDelete" data-state="@item.BC_Status">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        $(function () {
+
+            //冻结商家
+            $('a[name="btnDelete"]').on('click', function () {
+                var state = $(this).data('state');
+                if (state == 1) {
+                    bootbox.alert("此户型已被删除！");
+                    return;
+                }
+                var sid = $(this).data('val');
+
+                bootbox.confirm("确定删除此户型？", function (o) {
+                    if (o) {
+                        $.post('/VillageBuilding/HouseTypeDelete', { id: sid, status: 1 }, function (o) {
+                            if ('ok' == o) {
+                                bootbox.alert("户型已被删除！", function () {
+                                    //window.location.reload();
+
+                                    location.reload();
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

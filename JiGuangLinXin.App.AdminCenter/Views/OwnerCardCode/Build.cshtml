@@ -1,0 +1,116 @@
+﻿@model Sys_OwnerCard
+@{
+    ViewBag.Title = "批量生成业主卡密钥";
+    ViewBag.ParentUrl = "/OwnerCardCode/Build";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.Action("Index","Console")">控制台</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "OwnerCardCode")">业主卡</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+
+<form class="form-horizontal" role="form" id="frm" method="POST" novalidate="novalidate" action="/OwnerCardCode/Build">
+    <div class="tabbable">
+        <ul class="nav nav-tabs padding-16">
+            <li class="active">
+                <a data-toggle="tab" href="#edit-basic">
+                    <i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+                    业主卡信息
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content profile-edit-tab-content">
+        <div class="tab-pane in active">
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="OC_BatchNo"> 批次号 </label>
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.OC_BatchNo, new { @class = "col-xs-12 col-sm-10", placeholder = "业主卡批次号(如：2016-03-24)", required = "required", data_max = "20" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="OC_Flag"> 活动类型 </label>
+
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(o => o.OC_Flag, (IEnumerable<SelectListItem>)TempData["CardFlag"], new { @class = "col-xs-5 col-sm-10", required = "required" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="OC_TotalCount"> 数量 </label>
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.OC_TotalCount, new { @class = "col-xs-5 col-sm-5", placeholder = "批量生成的数量", required = "required", type = "number", min = "0" })
+
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="OC_Money">金额</label>
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.OC_Money, new { @class = "col-xs-5 col-sm-5", placeholder = "金额/卡", required = "required", type = "number", min = "0" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="OC_Remark">描述</label>
+
+                <div class="col-sm-9">
+                    @Html.TextAreaFor(o => o.OC_Remark, new { @class = "col-xs-12 col-sm-10", placeholder = "简单备注", data_max = "200" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        批量生成
+                    </button>
+
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+
+    <div class="hr hr-24"></div>
+</form>
+@section footer{
+    <script src="/assets/js/validation/jquery-html5Validate.js"></script>
+    <script src="/js/common.js"></script>
+    <script>
+        $("#frm").html5Validate(function () {
+            this.submit();
+        }, {
+            // novalidate: false,
+            // labelDrive: false
+
+        });
+    </script>
+}

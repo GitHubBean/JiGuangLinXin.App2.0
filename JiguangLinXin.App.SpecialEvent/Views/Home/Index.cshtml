@@ -1,0 +1,11 @@
+﻿
+@section scripts{
+    
+<script>
+    $(function () {
+        $.post("/sp/vote/Test", null, function (o) {
+            console.log(JSON.stringify(o));
+        });
+    });
+</script>
+}

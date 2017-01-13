@@ -1,0 +1,56 @@
+﻿@helper YesOrNo(string yes, string no, bool value)
+    {
+        /*** 默认情况，0表示no ,1表示yes ***/
+        if (value)
+        {
+    <span class="label label-important">@no</span>
+        }
+        else
+        {
+    <span class="label label-success">@yes</span>
+        }
+}
+@helper OkOrError(string succ,string  error ,bool flag=true)
+{
+    if (flag)
+    {
+        <img src='/static/img/success.png' alt='@succ' title='@succ' />
+    }
+    else
+    {
+        <img src='/static/img/error.png' alt='@error' title='@error' />
+    }
+}
+@*****新建按钮****@
+@helper BtnCreate(string url, string toggle = "")
+    {
+        if (toggle == "")
+        {
+    <a href="@url" class="btn btn-primary"  name="btnCreate"><i class="icon-plus"></i> 新 建</a>
+        }
+        else
+        {
+            <a @toggle class="btn btn-primary"  name="btnCreate"><i class="icon-plus"></i> 新 建</a>
+        }
+}
+@*****删除按钮****@
+@helper BtnDelete()
+    {
+        <a  class="btn btn-danger" name="btnDelete"><i class="icon-remove"></i> 删 除</a>
+}
+@*****修改按钮****@
+@helper BtnUpdate(string url)
+    {
+    <a href="@url" class="btn btn-info"  name="btnUpdate"><i class="icon-edit"></i> 修 改</a>
+}
+@*****搜索按钮****@
+@helper BtnSearch()
+    {
+         <input class="input-large" placeholder="关键字..." id="k" name="k" value="@Request.QueryString["k"]" type="text" />
+         <button class="btn" accesskey="S"  name="btnSearch"><i class="icon-search"></i> 提 交</button>
+}
+@**提交按钮**@
+@helper BtnSubmit()
+    {
+    <button class="btn btn-primary"   name="btnSubmit"><i class="icon-save"></i> 提 交</button>
+}

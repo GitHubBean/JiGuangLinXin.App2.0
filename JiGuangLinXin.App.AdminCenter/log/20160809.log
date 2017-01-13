@@ -1,0 +1,16 @@
+﻿日志时间：2016/8/9 10:50:04
+日志级别：Error
+日志内容：--【访问地址】:http://192.168.1.172:8125/notice/edit/2 *注：*在执行 controller[notice] 的 action[edit] 时产生异常:【未找到视图“edit”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/notice/edit.aspx
+~/Views/notice/edit.ascx
+~/Views/Shared/edit.aspx
+~/Views/Shared/edit.ascx
+~/Views/notice/edit.cshtml
+~/Views/notice/edit.vbhtml
+~/Views/Shared/edit.cshtml
+~/Views/Shared/edit.vbhtml】，详情:   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)    ###    【访问来源】:http://192.168.1.172:8125/Notice   ###    【访问IP】:192.168.1.172  --------2016/8/9 10:50:04 ##
+******************************

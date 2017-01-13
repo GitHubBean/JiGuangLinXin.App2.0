@@ -1,0 +1,408 @@
+﻿@model List<Sys_Attachment>
+@{
+    ViewBag.ParentUrl = "/VillageBuilding/BuildingEdit";
+    ViewBag.Title = "编辑楼盘漫游景观";
+}
+@section headerCss{
+    <link rel="stylesheet" href="/assets/css/colorbox.css" />
+    <!--上传附件图片-->
+    <link rel="stylesheet" href="/assets/css/dropzone.css" />
+
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li>
+            <a href="/VillageBuilding/Building">小区楼盘</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="page-header">
+    <h1>@ViewBag.BuildingName</h1>
+</div>
+<div class="col-sm-12">
+    <h4 class="header blue bolder smaller">批量上传景观漫游图片</h4>
+    <div class="col-sm-4">
+        <div class="col-xs-12 col-sm-10 center">
+            <input type="file" name="landscape[]" multiple id="landscape" />
+            <div class="hr hr-12 dotted"></div>
+            <button type="button" id="landscapeUpload" class="btn btn-sm btn-primary">上传</button>
+            <button type="button" class="btn btn-sm" id="landscapeUploadCancel">取消</button>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <ul class="ace-thumbnails clearfix" id="imgList">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <input type="hidden" name="hidImags" data-fname="@item.A_FileName" data-oldname="@item.A_FileNameOld" data-size="@item.A_Size" data-title="@item.A_Remark" />
+
+                    <a href="@string.Format("/cache/{0}/{1}",item.A_Folder,item.A_FileName)" data-rel="colorbox">
+                        <img alt="@item.A_Remark" src="@string.Format("/cache/{0}/{1}",item.A_Folder,item.A_FileName)" />
+                        <div class="tags">
+                            <span class="label-holder">
+                                <span class="label label-info arrowed">@item.A_Remark</span>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="tools tools-top">
+                        <a href="###" name="btnUp">
+                            <i class="ace-icon fa fa-arrow-up"></i>
+                        </a>
+                        <a href="###" name="btnEdit">
+                            <i class="ace-icon fa fa-pencil"></i>
+                        </a>
+                        <a href="###" name="btnDelete">
+                            <i class="ace-icon fa fa-times red"></i>
+                        </a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="space-10"></div>
+</div>
+<div class="col-sm-12">
+    <form id="frm" method="post" action="/VillageBuilding/LandscapeSave">
+        <input type="hidden" name="imgJson" id="imgJson" value="" />
+        <input type="hidden" name="bId" id="bId" value="@ViewBag.BuildId" />
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="button" id="btnSubmit">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    保存并下一步
+                </button>
+
+                &nbsp; &nbsp;
+                <a class="btn" href="/VillageBuilding/Building">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    取消
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+@section footerScript
+{
+    <!-- page specific plugin scripts -->
+    <script src="/assets/js/jquery.colorbox-min.js"></script>
+    <script src="/assets/js/bootbox.min.js"></script>
+
+}
+@section footer
+{
+    <script>
+        $(function() {
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function() {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function() {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function() {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").append("<i class='ace-icon fa fa-spinner orange'></i>"); //let's add a custom loading icon
+
+
+            $('#acc').click(function() {
+                var html = '<li>' +
+                    '<a href="/assets/images/gallery/image-5.jpg" data-rel="colorbox">' +
+                    '<img alt="150x150" src="/assets/images/gallery/thumb-5.jpg" />' +
+                    '<div class="tags">' +
+                    ' <span class="label-holder">' +
+                    '   <span class="label label-info arrowed">fountain</span>' +
+                    ' </span>' +
+                    '</div>' +
+                    '</a>' +
+                    ' <div class="tools tools-top">' +
+                    '  <a href="###" name="btnUp">' +
+                    '  <i class="ace-icon fa fa-arrow-up"></i>' +
+                    ' </a>' +
+                    ' <a href="###" name="btnEdit">' +
+                    ' <i class="ace-icon fa fa-pencil"></i>' +
+                    '</a>' +
+                    ' <a href="###" name="btnDelete">' +
+                    ' <i class="ace-icon fa fa-times red"></i>' +
+                    ' </a>' +
+                    ' </div>' +
+                    ' </li>';
+
+                $('#imgList').append(html);
+                $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            });
+            //置顶
+            $('body').on('click', 'a[name="btnUp"]', function() {
+                var li = $(this).parents('li');
+                $('#imgList').prepend(li);
+            });
+            //删除
+            $('body').on('click', 'a[name="btnDelete"]', function() {
+                var li = $(this).parents('li').remove();
+                //$('#imgList').prepend(li);
+            });
+            //编辑标题
+            $('body').on('click', 'a[name="btnEdit"]', function() {
+                var title = $(this).parents('li').find('.label-info');
+                var hidTitle = $(this).parents('li').find('input[name="hidImags"]');
+                bootbox.prompt("设置景观漫游标题," + $(title).html(), function(rs) {
+                    if (rs) {
+                        $(title).html(rs);
+                        $(hidTitle).data("title", rs);
+                    } else if (rs == '') {
+                        bootbox.alert('请输入标题内容');
+                    }
+                });
+            });
+
+            //封面图片上传
+            var file_input = $("#landscape");
+            var upload_in_progress = false;
+            file_input.ace_file_input({
+                style: 'well',
+                btn_choose: '支持批量上传景观漫游图片',
+                btn_change: null,
+                no_icon: 'ace-icon fa fa-picture-o',
+                thumbnail: 'large',
+                droppable: true,
+
+                maxSize: 11000000, //bytes
+                allowExt: ['jpg', 'jpeg', 'png', 'gif'],
+                allowMime: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'],
+
+                before_remove: function() {
+                    if (upload_in_progress)
+                        return false; //if we are in the middle of uploading a file, don't allow resetting file input
+                    return true;
+                },
+                //预览失败
+                preview_error: function(filename, code) {
+                    //code = 1 means file load error
+                    //code = 2 image load error (possibly file is not an image)
+                    //code = 3 preview failed
+                }
+            });
+
+            file_input.on('file.error.ace', function(ev, info) {
+                if (info.error_count['ext'] || info.error_count['mime']) alert('上传文件的格式不正确！');
+                if (info.error_count['size']) alert('文件最大尺寸必须小于100KB');
+
+                //you can reset previous selection on error
+                // ev.preventDefault();
+                file_input.ace_file_input('reset_input');
+            });
+
+            //取消上传
+            $("#landscapeUploadCancel").on('click', function() {
+                file_input.ace_file_input('reset_input_ui');
+            });
+            //尝试上传封面图片
+            var ie_timeout = null; //a time for old browsers uploading via iframe
+
+            $('#landscapeUpload').on('click', function(e) {
+                e.preventDefault();
+
+                var files = file_input.data('ace_input_files');
+                if (!files || files.length == 0) return false; //no files selected
+
+                var deferred;
+                if ("FormData" in window) {
+                    //for modern browsers that support FormData and uploading files via ajax
+                    //we can do >>> var formData_object = new FormData($form[0]);
+                    //but IE10 has a problem with that and throws an exception
+                    //and also browser adds and uploads all selected files, not the filtered ones.
+                    //and drag&dropped files won't be uploaded as well
+
+                    //so we change it to the following to upload only our filtered files
+                    //and to bypass IE10's error
+                    //and to include drag&dropped files as well
+                    formData_object = new FormData(); //create empty FormData object
+
+                    //and then add files
+                    file_input.each(function() {
+                        var field_name = $(this).attr('name');
+                        //for fields with "multiple" file support, field name should be something like `myfile[]`
+
+                        var files = $(this).data('ace_input_files');
+                        if (files && files.length > 0) {
+                            for (var f = 0; f < files.length; f++) {
+                                formData_object.append(field_name, files[f]);
+                            }
+                        }
+                    });
+
+
+                    upload_in_progress = true;
+                    file_input.ace_file_input('loading', true);
+
+                    deferred = $.ajax({
+                        url: '/VillageBuilding/LandscapeUpload',
+                        type: 'POST',
+                        processData: false, //important
+                        contentType: false, //important
+                        dataType: 'json',
+                        data: formData_object
+                        /**
+                        ,
+                        xhr: function() {
+                            var req = $.ajaxSettings.xhr();
+                            if (req && req.upload) {
+                                req.upload.addEventListener('progress', function(e) {
+                                    if(e.lengthComputable) {
+                                        var done = e.loaded || e.position, total = e.total || e.totalSize;
+                                        var percent = parseInt((done/total)*100) + '%';
+                                        //percentage of uploaded file
+                                    }
+                                }, false);
+                            }
+                            return req;
+                        },
+                        beforeSend : function() {
+                        },
+                        success : function() {
+                        }*/
+                    })
+
+                } else {
+                    //for older browsers that don't support FormData and uploading files via ajax
+                    //we use an iframe to upload the form(file) without leaving the page
+
+                    deferred = new $.Deferred //create a custom deferred object
+
+                    var temporary_iframe_id = 'temporary-iframe-' + (new Date()).getTime() + '-' + (parseInt(Math.random() * 1000));
+                    var temp_iframe =
+                        $('<iframe id="' + temporary_iframe_id + '" name="' + temporary_iframe_id + '" \
+								frameborder="0" width="0" height="0" src="about:blank"\
+								style="position:absolute; z-index:-1; visibility: hidden;"></iframe>')
+                            .insertAfter($form)
+
+                    $form.append('<input type="hidden" name="temporary-iframe-id" value="' + temporary_iframe_id + '" />');
+
+                    temp_iframe.data('deferrer', deferred);
+                    //we save the deferred object to the iframe and in our server side response
+                    //we use "temporary-iframe-id" to access iframe and its deferred object
+
+                    $form.attr({
+                        method: 'POST',
+                        enctype: 'multipart/form-data',
+                        target: temporary_iframe_id //important
+                    });
+
+                    upload_in_progress = true;
+                    file_input.ace_file_input('loading', true); //display an overlay with loading icon
+                    $form.get(0).submit();
+
+
+                    //if we don't receive a response after 30 seconds, let's declare it as failed!
+                    ie_timeout = setTimeout(function() {
+                        ie_timeout = null;
+                        temp_iframe.attr('src', 'about:blank').remove();
+                        deferred.reject({ 'status': 'fail', 'message': 'Timeout!' });
+                    }, 30000);
+                }
+
+
+                ////////////////////////////
+                //deferred callbacks, triggered by both ajax and iframe solution
+                deferred
+                    .done(function(result) { //success
+                        //format of `result` is optional and sent by server
+                        //in this example, it's an array of multiple results for multiple uploaded files
+                        var message = '';
+                        for (var i = 0; i < result.length; i++) {
+                            if (result[i].status == 'ok') {
+                                //message += result[i].message + "，返回的地址为：" + result[i].url;
+
+                                var html = '<li>' +
+                                    '<input type="hidden" name="hidImags" data-fname="' + result[i].fname + '" data-oldname="' + result[i].oldname + '" data-size="' + result[i].size + '" data-title="' + result[i].title + '" />' +
+                                    '<a href="' + result[i].url + '" data-rel="colorbox">' +
+                                    '<img alt="缩略图" width="150" src="' + result[i].url + '" />' +
+                                    '<div class="tags">' +
+                                    ' <span class="label-holder">' +
+                                    '   <span class="label label-info arrowed">' + result[i].title + '</span>' +
+                                    ' </span>' +
+                                    '</div>' +
+                                    '</a>' +
+                                    ' <div class="tools tools-top">' +
+                                    '  <a href="###" name="btnUp">' +
+                                    '  <i class="ace-icon fa fa-arrow-up"></i>' +
+                                    ' </a>' +
+                                    ' <a href="###" name="btnEdit">' +
+                                    ' <i class="ace-icon fa fa-pencil"></i>' +
+                                    '</a>' +
+                                    ' <a href="###" name="btnDelete">' +
+                                    ' <i class="ace-icon fa fa-times red"></i>' +
+                                    ' </a>' +
+                                    ' </div>' +
+                                    ' </li>';
+                                $('#imgList').append(html);
+
+                            } else {
+                                alert("图片上传失败" + result[i].message);
+                            }
+                        }
+                        $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+                        //alert(message);
+                    })
+                    .fail(function(result) { //failure
+                        alert("上传封面出错");
+                    })
+                    .always(function() { //called on both success and failure
+                        if (ie_timeout) clearTimeout(ie_timeout)
+                        ie_timeout = null;
+                        upload_in_progress = false;
+                        file_input.ace_file_input('loading', false);
+                    });
+
+                deferred.promise();
+                file_input.ace_file_input('reset_input');
+            });
+            //封面图片上传 end
+
+            var landId = "@ViewBag.BuildId"
+            $('#btnSubmit').click(function() {
+                // $.ajax({ url: '/VillageBuilding/Landscape', type: "POST", data: JSON.stringify(jsObj), success: function() {} });
+                if ($('input[name="hidImags"]').length >0 ) {
+                    var jsObj = [];
+                    $('input[name="hidImags"]').each(function (i, v) {
+                        //console.log(i + '*****' + $(v).data("oldname") + landId);
+                        jsObj[i] = {
+                            pid: landId,
+                            oldname: $(v).data("oldname"),
+                            fname: $(v).data("fname"),
+                            size: $(v).data("size"),
+                            title: $(v).data("title"),
+                            rank: i
+                        };
+                    });
+                    //console.log(JSON.stringify(jsObj));
+                    $('#imgJson').val(JSON.stringify(jsObj));
+
+                    $('#frm').submit();
+                }
+            });
+        });
+    </script>
+}
+

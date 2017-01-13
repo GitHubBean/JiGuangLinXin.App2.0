@@ -1,0 +1,134 @@
+﻿@model PagedList<Core_Building>
+@{
+    ViewBag.ParentUrl = "/VillageBuilding/Building";
+    ViewBag.Title = "商家楼盘";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">平台所有商家楼盘</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                <form class="form-search">
+                    <span class="">
+                        <input type="text" placeholder="楼盘名" class="nav-search-input" id="key" name="key" value="@Request.QueryString["key"]">
+                    </span>
+                    <button type="submit" class="btn btn-info btn-xs">
+                        <i class="ace-icon fa fa-search bigger-110"></i>
+                        搜索
+                    </button>
+                    <a class="btn btn-xs btn-success" href="@Url.Action("BuildingEdit", "VillageBuilding")">
+                        <i class="icon-plus bigger-110"></i>
+                        新增楼盘
+                    </a>
+                </form>
+            </div><!-- #nav-search -->
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>楼盘名</th>
+                        <th>分类</th>
+                        <th>标识</th>
+                        <th>城市</th>
+                        <th class="hidden-480">
+                            <i class="ace-icon fa fa-flag bigger-110 hidden-480"></i>
+                            标签
+                        </th>
+                        <th class="hidden-480">置顶</th>
+                        <th class="hidden-480">推荐</th>
+                        <th class="hidden-480">点击量</th>
+                        <th class="hidden-480">开始时间</th>
+                        <th class="hidden-480">截止时间</th>
+                        <th>状态</th>
+                        <th class="hidden-480">录入时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.B_Name</td>
+                            <td>@Enum.GetName(typeof(BuildingTypeEnum), obj.B_TypeId)</td>
+                            <td>@Enum.GetName(typeof(BuildingFlagEnum), obj.B_Flag)</td>
+                            <td>@obj.B_CityName</td>
+                            <td class="hidden-480">@obj.B_Tags</td>
+                            <td class="hidden-480">@UtilPartialView.YesOrNo("是", "否", obj.B_Top == 0)</td>
+                            <td class="hidden-480">@UtilPartialView.YesOrNo("是", "否", obj.B_Recom == 0)</td>
+                            <td class="hidden-480">@obj.B_Clicks</td>
+                            <td class="hidden-480">@obj.B_BTime</td>
+                            <td class="hidden-480">@obj.B_ETime</td>
+                            <td>@UtilPartialView.OkOrError("正常", "已删除", obj.B_Status == 0)</td>
+                            <td class="hidden-480">@obj.B_Time</td>
+
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="编辑信息" href="/VillageBuilding/BuildingEdit/@obj.B_Id">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+                                    <a class="btn btn-xs btn-success tooltip-success" data-rel="tooltip" data-placement="top" title="景观漫游" href="/VillageBuilding/Landscape/@obj.B_Id">
+                                        <i class="ace-icon fa fa-camera bigger-120"></i>
+                                    </a>
+                                    <a class="btn btn-xs btn-warning tooltip-warning" data-rel="tooltip" data-placement="top" title="楼盘户型" href="/VillageBuilding/HouseType/@obj.B_Id">
+                                        <i class="ace-icon fa fa-home bigger-120"></i>
+                                    </a>
+                                    <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="删除" href="###" data-val="@obj.B_Id" name="btnDelete" data-state="@obj.B_Status">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "id", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //删除楼盘
+            $('a[name="btnDelete"]').on('click', function () {
+                var state = $(this).data('state');
+                if (state == 1) {
+                    bootbox.alert("此楼盘已被删除！");
+                    return;
+                }
+                var sid = $(this).data('val');
+
+                bootbox.confirm("确定删除此楼盘？", function (o) {
+                    if (o) {
+                        $.post('/VillageBuilding/BuildingForzen', { id: sid, status: 1 }, function (o) {
+                            if ('ok' == o) {
+                                bootbox.alert("此楼盘已被删除！", function () {
+                                    //window.location.reload();
+                                    location.reload();
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

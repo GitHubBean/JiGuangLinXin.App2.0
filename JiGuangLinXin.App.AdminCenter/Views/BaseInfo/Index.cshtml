@@ -1,0 +1,81 @@
+﻿@using JiGuangLinXin.App.Provide.StringHelper
+@model List<Sys_BaseInfo>
+@{
+    ViewBag.ParentUrl = "/BaseInfo/Index";
+    ViewBag.Title = "通用设置";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">处理约定的数据：协议、关于我们、游戏中心第三方URL</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                @*<a class="btn btn-xs btn-success" href="/VillageLinxin/Edit">
+                    <i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>
+                    新增小区
+                </a>*@
+            </div>
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>类型</th>
+                        <th>标题</th>
+                        <th>内容</th>
+                        <th>扩展链接</th>
+                        <th>时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.B_Id</td>
+                            <td>@Enum.GetName(typeof(ProtocolEnum), int.Parse(obj.B_Code))</td>
+                            <td>@obj.B_Title</td>
+                            <td>
+                                @{
+                        var html = obj.B_Content.removeHtml();
+                        if (html.Length > 20)
+                        {
+                            html = html.Substring(0, 20);
+                        }
+                        @html
+                                }
+                            </td>
+                            <td>@obj.B_ExProp</td>
+                            <td>@obj.B_Time</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="重新编辑" href="/BaseInfo/Edit/@obj.B_Id">
+                                        编辑
+                                        <i class="ace-icon fa fa-edit bigger-120"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->

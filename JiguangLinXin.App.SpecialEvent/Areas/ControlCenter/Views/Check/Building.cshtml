@@ -1,0 +1,105 @@
+﻿@using JiGuangLinXin.App.Entities.BaseEnum
+@model PagedList<Core_VillageApply>
+@{
+    ViewBag.ParentUrl = "/Cp/Check/Building";
+    ViewBag.Title = "小区申请审核";
+}@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/cp/console/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">用户活动申请自家小区参加，管理人员核实后，在小区管理中添加即可</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>城市</th>
+                        <th>地区</th>
+                        <th>小区名称</th>
+                        <th>状态</th>
+                        <th>时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.A_CityName</td>
+                            <td>@obj.A_DistrictName</td>
+                            <td>@obj.A_ApplyName</td>
+                            <td>
+                                @if (obj.A_State == 0)
+                                {
+                                    <span class="label label-info">待处理</span>
+                                }
+                                else if (obj.A_State == 1)
+                                {
+                                    <span class="label label-success">审核通过</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-important">审核失败</span>
+                                }
+                            </td>
+                            <td>@obj.A_Time</td>
+                            <td>
+                                @if (obj.A_State == (int)AuditingEnum.未认证)
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-success tooltip-success" data-rel="tooltip" data-placement="top" title="通过审核" href="###" onclick="oper('@obj.A_Id',1)">
+                                            通过
+                                            <i class="ace-icon glyphicon glyphicon-ok bigger-120"></i>
+                                        </a>
+                                        <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="审核不通过" href="###" data-val="@obj.A_Id" onclick="oper('@obj.A_Id',2)">
+                                            拒绝
+                                            <i class="ace-icon glyphicon glyphicon-remove bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "id", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        function oper(id, state) {
+            bootbox.confirm("请仔细核查此用户的申请？", function (o) {
+                if (o) {
+                    $.post('/Cp/Check/Allow', { id: id, state: state }, function (o) {
+                        if ('ok' == o) {
+                            bootbox.alert("操作成功！", function () {
+                                //window.location.reload();
+                                location.reload();
+                            });
+                        } else {
+                            bootbox.alert("操作有误！");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

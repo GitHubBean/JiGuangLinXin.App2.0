@@ -1,0 +1,142 @@
+﻿@model Core_BuidingCube
+@{
+    ViewBag.ParentUrl = "/VillageBuilding/BuildingEdit";
+    ViewBag.Title = "编辑楼盘户型";
+}
+@section headerCss{
+    <link rel="stylesheet" href="/assets/css/colorbox.css" />
+    <!--上传附件图片-->
+    <link rel="stylesheet" href="/assets/css/dropzone.css" />
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li>
+            <a href="/VillageBuilding/Building">所有楼盘</a>
+        </li>
+        <li>
+            <a href="/VillageBuilding/BuildingEdit/@Model.BC_BuildingId">@Model.BC_Title</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="page-header">
+    <h1>华润中央公园 </h1>
+</div>
+<div class="col-sm-12">
+    <form class="form-horizontal" role="form" id="frm" method="POST" novalidate="novalidate" action="/VillageBuilding/HouseTypeEdit">
+        @Html.HiddenFor(o=>o.BC_Id)
+        @Html.HiddenFor(o => o.BC_BuildingId)
+        <div class="row">
+            <div class="space-4"></div>
+            <h4 class="header blue bolder smaller">基础信息
+                <small id="uploadTips">
+                </small>
+            </h4>
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="imgAG_Img"> 户型封面 </label>
+                <div class="col-sm-9">
+                    <img id="imgBC_CoverImg" src="@string.Format("{0}", string.IsNullOrEmpty(Model.BC_CoverImg) ? "/static/img/uploadpic.png" : "/cache" + Model.BC_CoverImg)" style="width: 135px;height:113px;" alt="图片上传" />
+                    <input type="hidden" id="BC_CoverImg" name="BC_CoverImg" value="@Model.BC_CoverImg" />
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="BC_Title"> 标题 </label>
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.BC_Title, new { @class = "col-xs-12 col-sm-10", placeholder = "户型标题", required = "required", data_max = "20" })                    
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="BC_Remark"> 描述 </label>
+
+                <div class="col-sm-9">
+                    @Html.TextAreaFor(o => o.BC_Remark, new { @class = "col-xs-12 col-sm-10", placeholder = "户型描述", data_max="50" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="BC_Rank"> 排序值 </label>
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.BC_Rank, new { placeholder = "户型排序", required = "required", type = "number", min = "0" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right">户型状态</label>
+
+                <div class="col-sm-9">
+                    <label class="inline">
+                        <input name="BC_Status" type="radio" class="ace" value="0" />
+                        <span class="lbl middle"> 正常</span>
+                    </label>
+
+                    &nbsp; &nbsp; &nbsp;
+                    <label class="inline">
+                        <input name="BC_Status" type="radio" class="ace" value="1" />
+                        <span class="lbl middle"> 删除</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+        </div>
+
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit" id="btnSubmit">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    确定并下一步
+                </button>
+
+                &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    取消
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+@section footerScript
+{
+<script src="/assets/js/validation/jquery-html5Validate.js"></script>
+<script src="@Url.Content("~/assets/js/file-upload/ajaxupload.js")" type="text/javascript"></script>
+<script src="/js/common.js"></script>
+}
+@section footer
+{
+    <script>
+        $("#frm").html5Validate(function () {
+            this.submit();
+        }, {
+            // novalidate: false,
+            // labelDrive: false
+
+        });
+        common.ImagesUploadFileFun1('imgBC_CoverImg', 'BC_CoverImg', 'cube');
+        $(function () {
+
+            var state = @Model.BC_Status
+            state = state || 0;
+            $('input[name="BC_Status"][value="' + state + '"]').prop("checked", true);
+        });
+    </script>
+}

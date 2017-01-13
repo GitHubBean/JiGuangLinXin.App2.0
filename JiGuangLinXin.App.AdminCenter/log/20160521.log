@@ -1,0 +1,19 @@
+﻿日志时间：2016/5/21 16:57:27
+日志级别：Error
+日志内容：--【访问地址】:http://192.168.3.95:8125/Check/Auditing *注：*在执行 controller[Check] 的 action[Auditing] 时产生异常:【请求被中止: 未能创建 SSL/TLS 安全通道。】，详情:   在 cn.jpush.api.common.BaseHttpClient.sendRequest(String method, String url, String auth, String reqParams)
+   在 cn.jpush.api.common.BaseHttpClient.sendPost(String url, String auth, String reqParams)
+   在 cn.jpush.api.push.PushClient.sendPush(String payloadString)
+   在 cn.jpush.api.push.PushClient.sendPush(PushPayload payload)
+   在 cn.jpush.api.JPushClient.SendPush(PushPayload payload)
+   在 JiGuangLinXin.App.Services.Tuisong.PushMessage(Int32 platform, String alert, String title, String content, String[] ids) 位置 e:\companyProject\极光邻信App2.0\code\JiGuangLinXin.App2.1\JiGuangLinXin.App2.0\JiGuangLinXin.App.Services\jpush\Tuisong.cs:行号 295
+   在 JiGuangLinXin.App.AdminCenter.Controllers.CheckController.Auditing(Guid id, Nullable`1 buildId, Int32 state, String tips) 位置 e:\companyProject\极光邻信App2.0\code\JiGuangLinXin.App2.1\JiGuangLinXin.App2.0\JiGuangLinXin.App.AdminCenter\Controllers\CheckController.cs:行号 137
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)    ###    【访问来源】:http://192.168.3.95:8125/Check/Allow/a8c2dd0b-35d1-4b78-82dd-8a30b95d0cbb   ###    【访问IP】:192.168.3.95  --------2016/5/21 16:57:27 ##
+******************************

@@ -1,0 +1,137 @@
+﻿@model PagedList<Sys_Admin>
+@{
+    ViewBag.ParentUrl = "/Admin/Index";
+    ViewBag.Title = "系统管理员";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">控制台</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">检索/管理全平台的系统帐号</a>
+            </h4>
+            <div class="hr hr-18 dotted hr-double"></div>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                <form class="form-search">
+                    <span class="">
+                        <input type="text" placeholder="关键字搜索" class="nav-search-input col-xs-10 col-sm-5" style="width: 280px;" id="key" name="key" value="@Request.QueryString["key"]">
+                    </span>
+                    <button type="submit" class="btn btn-info btn-xs">
+                        <i class="ace-icon fa fa-search bigger-110"></i>
+                        搜索
+                    </button>
+                </form>
+            </div><!-- #nav-search -->
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>帐号</th>
+                        <th>角色</th>
+                        <th>性别</th>
+                        <th>电话</th>
+                        <th>备注</th>
+                        <th>状态</th>
+                        <th>录入时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.A_Account</td>
+                            <td>
+                                @Enum.GetName(typeof(ManagerRoleEnum), obj.A_Role)
+                            </td>
+                            <td>
+                                @if (obj.A_Sex == (int)SexEnum.男)
+                                {
+                                    <span class="label label-info">先生</span>
+                                }
+                                else if (obj.A_Sex == (int)SexEnum.不详)
+                                {
+                                    <span class="label">未设置</span>
+
+                                }
+                                else if (obj.A_Sex == (int)SexEnum.女)
+                                {
+                                    <span class="label label-success">女士</span>
+                                }
+                            </td>
+                            <td>@obj.A_Phone</td>
+                            <td>@obj.A_Remark</td>
+                            <td>@UtilPartialView.YesOrNo("是", "否", obj.A_Status == 1)</td>
+                            <td>@obj.A_Time</td>
+                            <td>
+                                @if (obj.A_Status == (int)UserStatusEnum.冻结)
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-success tooltip-success" data-rel="tooltip" data-placement="top" title="解冻帐号" href="###" data-val="@obj.A_Id" name="btnOption">
+                                            解冻
+                                            <i class="ace-icon fa fa-unlock bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }
+                                else if (obj.A_Status == (int)UserStatusEnum.正常)
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="冻结帐号" href="###" data-val="@obj.A_Id" name="btnOption">
+                                            冻结
+                                            <i class="ace-icon fa fa-lock bigger-120"></i>
+                                        </a>
+                                    </div>
+
+                                }
+
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="冻结帐号" href="/admin/edit/@obj.A_Id">
+                                        编辑
+                                        <i class="ace-icon fa fa-edit bigger-120"></i>
+                                    </a>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "pn", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //审核不通过
+            $('a[name="btnOption"]').on('click', function () {
+                $.post('/Admin/Forzen', { id: $(this).data('val') }, function (o) {
+                    //alert(o.Msg);
+                    if ('ok' == o) {
+                        bootbox.alert("操作成功！", function () {
+                            //window.location.reload();
+                            location.reload();
+                        });
+                    } else {
+                        bootbox.alert("操作有误！");
+                    }
+                });
+            });
+        });
+    </script>
+}

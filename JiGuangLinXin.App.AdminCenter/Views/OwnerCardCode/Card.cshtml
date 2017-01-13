@@ -1,0 +1,69 @@
+﻿@model List<Sys_OwnerCard>
+@{
+    ViewBag.ParentUrl = "/OwnerCardCode/Card";
+    ViewBag.Title = "业主卡制卡记录";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">业主卡，由平台统一发放给开发商、管理员；可抵扣实际消费金额</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>批次号</th>
+                        <th>总数</th>
+                        <th class="hidden-480">剩余数量</th>
+                        <th class="hidden-480">备注</th>
+                        <th class="hidden-480">制卡人</th>
+                        <th class="hidden-480">制卡时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@Enum.GetName(typeof(OwnerCardFlagEnum), obj.OC_Flag)</td>
+                            <td>@obj.OC_Money.ToString("F0")</td>
+                            <td>@obj.OC_BatchNo</td>
+                            <td>@obj.OC_TotalCount</td>
+                            <td class="hidden-480">@obj.OC_RemainCount</td>
+                            <td class="hidden-480">@obj.OC_Remark</td>
+                            <td class="hidden-480">@obj.OC_AdminName</td>
+                            <td class="hidden-480">@obj.OC_Time</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="查看本批次业主卡密" href="/OwnerCardCode/Index/@obj.OC_Id">
+                                        查看
+                                        <i class="ace-icon fa fa-eye bigger-120"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->

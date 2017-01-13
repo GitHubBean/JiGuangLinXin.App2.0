@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head lang="zh-cn">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title>新家推荐分享</title>
+		<meta name="renderer" content="webkit">
+		<!-- No Baidu Siteapp-->
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="email=no" />
+		<link rel="stylesheet" href="css/index.css">
+	</head>
+
+<body>
+	<div class='normal' id='normal' style="display: none;"><a href="http://www.jgyx.com/AppDownload/"><img src="img/normal.jpg" width="100%" /></a></div>
+	<div class='hongbao' id='hongbao' style="display: none;" ><img src="img/hongbao.jpg" width="100%" /></div>
+<script src='js/zepto.min.js'></script>
+<!--<script src='js/fastclick.min.js'></script>
+<script src='js/vue.js'></script>-->
+<script type="text/javascript">
+	document.body.addEventListener('touchstart', function () {}); 
+	function param(key) {
+        var url = location.search.replace(/^\?/,'').split('&');
+        var paramsObj = {};
+        for(var i = 0, iLen = url.length; i < iLen; i++){
+            var param = url[i].split('=');
+            paramsObj[param[0]] = param[1];
+        }
+        if(key){
+            return decodeURI(paramsObj[key]) || '';
+        }
+        return paramsObj;
+    };
+	$(function() {
+//  	FastClick.attach(document.body);
+    	if(param('share') === 'true') {
+    	    $('#hongbao').show();
+    	} else {
+    	    $('#normal').show();
+    	}
+    	$('#hongbao').click(function(){
+    	    $(this).hide();
+    	    $('#normal').show();
+    	})
+	});
+</script>
+	
+</body>
+
+</html>

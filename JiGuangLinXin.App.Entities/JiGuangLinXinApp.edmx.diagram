@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="08a66dd3b6b04ee69df8b48da6cef194" Name="Diagram1" ZoomLevel="98" DisplayType="false" ShowGrid="true">
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Activity" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ActivityApply" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ActivityGoods" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ActivityGoodsOrder" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Ad" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_AlipayOrder" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_AuditingCash" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_AuditingGroupMananger" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_AuditingVillage" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Balance" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_BillMember" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_BuidingCube" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Building" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_BuildingActivity" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_BuildingType" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_BusDeveloper" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Business" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_BusinessEnteringApply" Width="1.5" PointX="2.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_BusinessVillage" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ChinapayDept" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ChinapayOrder" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ChinapayOrder_bk" Width="1.5" PointX="4.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_DeliveryAddress" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Event" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_EventApply" Width="1.5" PointX="16.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_EventGatherLike" Width="1.5" PointX="16.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_EventJoinHistory" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_EventScope" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_EventVoteItem" Width="1.5" PointX="18.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_GroupAlbum" Width="1.5" PointX="18.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_GroupAlbumPic" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_GroupBuyOrder" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_GroupBuyVillage" Width="1.5" PointX="20.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Interactive" Width="1.5" PointX="8.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Invite" Width="1.5" PointX="10.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_InviteApply" Width="1.5" PointX="20.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_InviteGroup" Width="1.5" PointX="20.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_InviteReply" Width="1.5" PointX="20.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_JuheDept" Width="1.5" PointX="16.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_JuheOrder" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_LifestyleServicesLike" Width="1.5" PointX="2.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_LifestyleType" Width="1.5" PointX="22.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Likes" Width="1.5" PointX="22.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_LuckyGift" Width="1.5" PointX="22.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_LuckyGiftBackOrder" Width="1.5" PointX="18.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_LuckyGiftDetail" Width="1.5" PointX="22.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_LuckyGiftHistory" Width="1.5" PointX="20.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_MallGoods" Width="1.5" PointX="22.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_MallOrder" Width="1.5" PointX="12.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_MallOrderDetail" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_MallType" Width="1.5" PointX="24.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_MalShoppingCar" Width="1.5" PointX="24.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_OwnerCardHistory" Width="1.5" PointX="24.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Showcase" Width="1.5" PointX="24.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ShowcaseScope" Width="1.5" PointX="14.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Topic" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_TopicMovieTicket" Width="1.5" PointX="0.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_User" Width="1.5" PointX="2.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_UserFriend" Width="1.5" PointX="26.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_UserFriendsApply" Width="1.5" PointX="8.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Village" Width="1.5" PointX="26.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_VillageLinxin" Width="1.5" PointX="26.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_VoucherCard" Width="1.5" PointX="16.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_VoucherCardHistory" Width="1.5" PointX="26.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_VoucherCardPost" Width="1.5" PointX="4.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_Admin" Width="1.5" PointX="18.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_AdSystem" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_Attachment" Width="1.5" PointX="28.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_BaseInfo" Width="1.5" PointX="28.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_BillMaster" Width="1.5" PointX="28.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_CheckHistory" Width="1.5" PointX="28.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_City" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_DbErrorLog" Width="1.5" PointX="28.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_DiscountRate" Width="1.5" PointX="24.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_District" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_ErrorLog" Width="1.5" PointX="26.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_IndexRecommend" Width="1.5" PointX="28.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_Message" Width="1.5" PointX="10.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_MessageCenter" Width="1.5" PointX="12.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_OperateLog" Width="1.5" PointX="30.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_OwnerCard" Width="1.5" PointX="30.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_Province" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_LifestyleOrder" Width="1.5" PointX="14.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_LifestyleServices" Width="1.5" PointX="30.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.view_businessService" Width="1.5" PointX="20.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.view_event" Width="1.5" PointX="30.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.view_receiveGiftList" Width="1.5" PointX="30.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.view_shoppingCar" Width="1.5" PointX="6.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.view_topicTicketHistory" Width="1.5" PointX="22.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.view_topicTicketReceive" Width="1.5" PointX="32.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LinXinApp20Model.view_topicTicketSend" Width="1.5" PointX="32.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="LinXinApp20Model.FK_Core_AlipayOrder_Core_AlipayOrder" />
+        <AssociationConnector Association="LinXinApp20Model.FK_Sys_City_Sys_Province" />
+        <AssociationConnector Association="LinXinApp20Model.FK_Sys_District_Sys_City" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_AppVersion" Width="1.5" PointX="17.375" PointY="32.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_GroupBuyType" Width="1.5" PointX="25.375" PointY="32.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_GroupBuy" Width="1.5" PointX="0.75" PointY="33.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_GroupBuyScope" Width="1.5" PointX="5.375" PointY="22.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Feedback" Width="1.5" PointX="3.375" PointY="33.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_JPushMessage" Width="1.5" PointX="9.375" PointY="33.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_OwnerCardCode" Width="1.5" PointX="31.375" PointY="13.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Comments" Width="1.5" PointX="7.375" PointY="15.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Prize" Width="1.5" PointX="33.375" PointY="12.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_PrizeDetail" Width="1.5" PointX="33.375" PointY="16.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Billboard" Width="1.5" PointX="19.375" PointY="33.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Hotline" Width="1.5" PointX="33.375" PointY="21.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_Score" Width="1.5" PointX="33.375" PointY="25.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ScoreHistory" Width="1.5" PointX="33.375" PointY="29.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Core_ScoreExchange" Width="1.5" PointX="27.375" PointY="33.75" />
+        <EntityTypeShape EntityType="LinXinApp20Model.Sys_Notice" Width="1.5" PointX="29.375" PointY="33.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

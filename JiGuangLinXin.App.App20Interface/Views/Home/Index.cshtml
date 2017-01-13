@@ -1,0 +1,202 @@
+﻿
+<form method="POST" action="/lx/values/" enctype="multipart/form-data">
+    <input type="file" id="myFile" name="myFile" />
+    <input type="text" id="myName" name="myName" />
+    <button id="submit">上传。</button>
+</form>
+@section scripts{
+    <script>
+        $(function() {
+            //console.log(JSON.stringify({ "user": "fudu", "age": "1111" }));
+
+            var parm = {
+                money: 0.1,
+                count: 1,
+                uid: 128,
+                tips: '恭喜发财,喜气洋洋!',
+                groupId: '127439891465241020'
+            };
+            var q = { queryNo: "0211235253", merSysId: "00000318" };
+            /*查询账单
+            $.ajax({
+                url: "/lx/Chinapay/BillQuery",
+                type: "Post",
+                data: q,
+                success: function(a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+*/
+            var q2 = { 'cpToken': '7664E07D2838F5800DC2080D2CAF46B8825705B1DECA8ED2E2CC121790FD7E2B99B163C10EA22445B800B5B3B6912C0E224BFBB018B4C3A962F6F98053CDDBB8F5B7019AF65A055680757B9D84AEA06EDFB5174E06805E86FFA314EA0A2CE689F1B34D92A07AC7571F72718A21C0DA109394A8AF976EEDE20FBDC043FA288992E5C15FB1DAEE03757AD77D291CA2DB9BEE4CD91B5C09455C0B925E72BCEAEAFCCA76B54E65CEAB078C7D1DC2DAAFC293088C1DC16C7A83FCEA3C3B2D8787DAE5614F4B0CA6A4728BE0F28D81675B5130FDC949C2D925416A61A6D93151FB8C2A4852E91BFACD353E5DAECDD0AAF36E66F595CE12DD010E2E3FC1D18DCE82EEF1DE9CA3647DE77B580B756039293491D93F65797DE5D64899A4893EF23C240ECFFB83DB8DC45FD3D3165BDFB4DFD361BF92FCC5BB0ABC94F7BC40E1B7894B52949B56130CE26B681EDE513A2D7371DB6F6276D4A390E7C1243B832D30ADC6E2C48129FAF34274A06284C545275367BAB5CD4C90B6CFA6F9E51F679CD2388CB3D55D3B671319523CA36F68B7C82C517C386DC577FCECA0806F7CECC338FFF0FDF81BCDC27A9810EBA772E4B7A2C813DDE178865A9E5DE28D3869ACA62A41CF0B9C056DA4B25DB896781AC9B73147C9FFCA0F69006F89213FE69C18819F7D7B22969B544B14D062F6CFF1E98EE79479F7BCB2DE07EBD5B82EDAA238B7710FDDD895855AA45F14B79E28D72E076B0262558EC67267505C0E10139851F29E49F815E802B154EB385DE4E07209AF16B412E80BD373C78E930A093D3EDC6A7B091489DD58B055972D0C0AF28D90033273281FD0C2F514E6B9F33F6EC49BB41C4404DA9A08BBB81CFE6C516D254BD43D86882427D7CBF7137CBFBE36C1AEAD4F4A83C229548CC0F21C0A6CD8595B72CBE1135197319978340BD2AD2D27446443893EEEE80C36588C04B2ECE76D07A455EAF25C8F4F98935E73FC282D6DB50F2813DB0F92203D372CD0B001B338BA000C1290BA70F46940B76C19F55FCB07CFB5876759BD2DA3C946049BEEE3E35C215648F662F9A25E9168FEE39BD97E867CB5B9DAF4229827525AA1DD0C22E62DBB4CAEA07DBDA039730DB5E142306F94236B9749763B367133A26C1352AE7D35864BF14B1A4FE8CCE80541936E95D9CFFFA05E45CFC404F8BEDFBB38BDE75C3F4612CA54F5672FDA9D29BB22446B67AC1740403263C1242DAD8C111DD5783964BE56AB6F43ADE14B016A9D1FF49883F4702B81023D4233DA8B237736E620DF9259871BBCD4797932BE5ADF2502928072533DA684F86B90FC0BCA63FB6EE484DE0530002765FDA0083B2362FB8CF7C101CD2AAA5DAE0BFA1C28F276366D6E4F8777C62ECDF3EF70BFF04A04F91FD8216635EDF4F3C8F44B7B8C6E2F209C6EB1D585A5FEEBCEF9F6CEDFC4B102F03DEC7CFEAF80B8A32795E74FD908F7E180C7E06BC18BE74BBE2F4D803F88BBD8463A18C767030E5C437713020BC842CF7BAC3A6FBD85B0B53B0DE983A335F08F191C69510211F2EA4CA48F450F576D005E695854F842B05BFA9CFEC1824AC4545D5AE4F918138C0846D520F7872B82D3F5C1621BB7B781B3D4' }
+
+            /*确认下单		result	"OK\r\n\r\n\r\n                                                                                                                                                                                                                                                                                                  \r\n                                                                                                                                                                                                                                                                                                  \r\n                                                                                                                                                                                                                                                                                                  \r\n  \r\n\r\n\r\n \r\n     \r\n\r\n    \r\n   \r\n                                                                                                                                                                                                                                                                                              \r\n\r\n\r\n\r\n\r\n\r\n\t\r\n    \r\n\r\n                                                                                                                                                                                                                                                                                              \r\n\r\n\r\n\r\n"	string
+
+
+            $.ajax({
+                url: "/lx/Chinapay/BillSendOrder",
+                type: "Post",
+                data: q2,
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });*/
+            var q3 = { 'alipayOrder': 'RZBE08Y7HRMW8EI', 'cpToken': '7664E07D2838F5800DC2080D2CAF46B8825705B1DECA8ED2E2CC121790FD7E2B99B163C10EA22445B800B5B3B6912C0E224BFBB018B4C3A962F6F98053CDDBB8F5B7019AF65A055680757B9D84AEA06EDFB5174E06805E86FFA314EA0A2CE689F1B34D92A07AC7571F72718A21C0DA109394A8AF976EEDE20FBDC043FA288992E5C15FB1DAEE03757AD77D291CA2DB9BEE4CD91B5C09455C0B925E72BCEAEAFCCA76B54E65CEAB078C7D1DC2DAAFC293088C1DC16C7A83FCEA3C3B2D8787DAE5614F4B0CA6A4728BE0F28D81675B5130FDC949C2D925416A61A6D93151FB8C2A4852E91BFACD353E5DAECDD0AAF36E66F595CE12DD010E2E3FC1D18DCE82EEF1DE9CA3647DE77B580B756039293491D93F65797DE5D64899A4893EF23C240ECFFB83DB8DC45FD3D3165BDFB4DFD361BF92FCC5BB0ABC94F7BC40E1B7894B52949B56130CE26B681EDE513A2D7371DB6F6276D4A390E7C1243B832D30ADC6E2C48129FAF34274A06284C545275367BAB5CD4C90B6CFA6F9E51F679CD2388CB3D55D3B671319523CA36F68B7C82C517C386DC577FCECA0806F7CECC338FFF0FDF81BCDC27A9810EBA7E6E4C411FE6EBE172A1E770037B955652D802D8716D8C011EB7F188A0888C5627A5E5A3E1A76B3541D109E3D2CFD98ED66438E026CEB09DBC73CEC34D21385964E39DCF2FBC293B7E86AD86EE2D9397A164EA9E3A76591423208A13F6AA1684DC248BCA257BC1D310B269BA4117D24332DD61043AC004347C128AA8D6F8D2E8AE878098E0EB393E6DE4374BF80E2D6A5FBF388EE0E331AF1951A855BF681CC4B6C96B1C48526017DF5ED2BA0F2295E7DBC932EFE3957B23822B7A1E3773B389F631EEF529FCAC9B817D127AADFC6C82D99C540E6847371212CA609D093DAD1A5643838A593F48BF627686F2AEDED580AAD69E8412A32551528D64A244073584BF7E72EE77636BA662BE305D49555BDAAFACFCB8F44C169435D09E8D1C30186DD5F3AE755905BF13FBDD085EAE85CBC92D49AC8B02B86C3754D9DE8A02DC518D738AFCD75B74A103B81A8B797AAB24C7274DDC241ED4A932A30A20CCB444EB91D473AF3D1D43F47E776C0C0344871C861BC18D250ABB434A18A8AF141D4619D3543A75816737DEF1AB6CA079928612D26067F5380F1F6337F239A24ABCB8EB881337D77FAC10A6BDC6FE873C0A9D9BE172140D63A71BD81201AB15418D6A61AE5766D138CFEA3C560131D52610633BD29435B7A2F0B4D7B750EC7984253EA07559942FD5FCE77B93549F7AC288190680053F1BC6D3E27CA81FA86DEAADD608C4A73A662BB5593F997ED0EBA321CBF92651F1C9F502DFF85872D9D78D8EE9DBF6A0F72859E30E13B5B3C7DB4523E34476F52DE488176F096E4D97C9A9734A1161F9625A5845CD45B5E6343C951D156FDD5AE9A350096D6F8B2F9BC121FF9E673E9D0B461C9D0527FC0A90CEFF0693B51242E9D3941FD8833D9625B0334341B32AFBFAE03DEB7A703879E17D17F6691F715F3E5CE23D8525A2D5175D5BBEB1D67B44515D026F6D15FA90B57411BFFE8062B756C91449EA00B76AD8149EED871E1B93ED21D6211C7878A931AAD9F9A3969E20522CBE241CA4B9B1E42EDDBD76C9CE53611B7B255C9C6F77FFBAA2DF24FA035C7F0CF4874EF6BD66CB828ACAC0BD519ECE00ED3EF9221B5B8FBA54EBAD97AB0DBA6FF33D0C322AFF7716A73DF8EE0C6EC3D5A6722D1FF50CBD28B7DB161A75D7462E4A88AA63D012993D1305105702E0DB4CA9D9483BE19C1EBFBCE43838A793014FF2C152580125CE47438E05725ABD49AC71E517D0E7BA707E9EA3B2251319BDD70617ED9C18C7A42B19300AC865C' }
+
+            /*支付成功，销帐
+            $.ajax({
+                url: "/lx/Chinapay/BillWriteOff",
+                type: "Post",
+                data: q3,
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+
+
+            $.ajax({
+                url: "/lx/User/login",
+                type: "Post",
+                data: { 'cityName': "成都", 'vName': "",isHot:"1",phone:'15855556565'},
+                beforeSend: function (request) {
+                    request.setRequestHeader("platform", "1");
+                },
+                success: function(a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+
+            $.ajax({
+                url: "/lx/topic/CommentTopic/",
+                type: "Post",
+                data: { proId: '42e05769-a611-4197-b7f5-71b38f5ce0f5', refUid: '', refUname: '', content: "aaaa", nikeName: '哈哈哈' },
+                beforeSend: function (request) {
+                    request.setRequestHeader("uid", "109D8DCA-42DC-45A2-8B0B-05FA60C402A4");
+                },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+
+            $.ajax({
+                url: "/lx/topic/Index/",
+                type: "Post",
+                data: { buildingId: '', pn: 1,rows:10 },
+                beforeSend: function (request) {
+                    request.setRequestHeader("platform", "1");
+                },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+  $.ajax({
+                url: "/lx/user/SendSMS/",
+                type: "Post",
+                data: { phone: '15865632363', pn: 1, rows: 10 },
+                beforeSend: function (request) {
+                    request.setRequestHeader("platform", "1");
+                },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+            $.ajax({
+                url: "http://192.168.3.95:8123/lx/values/Traffic",
+                type: "POST",
+                data: { "payPwd": "", "Phone": "15825942359", "Money": "kfB2ROoAFcc=" },
+                beforeSend: function(request) {
+                    request.setRequestHeader("uid", "wVVLgz75kdU=");
+                    request.setRequestHeader("phone", "15825942359");
+
+                },
+                success: function(a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+
+            $.ajax({
+                url: "http://192.168.3.195:8123/lx/values/",
+                crossDomain: true,
+                xhrFields: { //允许跨域访问是添加cookie
+                    withCredentials: true
+                },
+                type: "GET",
+                data: null,
+                beforeSend: function (request) {
+                    request.setRequestHeader("platform", "1");
+                },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+            $.ajax({
+                url: "http://192.168.3.195:8001/api/values",
+                type: "GET",
+                data: { phone: "15825942359" },
+                beforeSend: function (request) {
+                    request.setRequestHeader("platfoDDDrm", "1");
+                },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+            $.ajax({
+                url: "http://192.168.1.172:8123/lx/EnteringApply/SendSms/",
+                type: "Post",
+                data: { phone: "15825942359" },
+                beforeSend: function (request) {
+                    request.setRequestHeader("platform", "1");
+                },
+                success: function (a) {
+                    alert(JSON.stringify(a));
+                    console.log(JSON.stringify(a));
+                }
+            });
+            $.ajax({
+                url: "/lx/messageCenter/NearbyLinyou",
+                type: "POST",
+                data: { lng: 106.49914265705948, lat: 29.627831532645523,radius:200 },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+            $.ajax({
+                url: "http://192.168.3.95:8123/lx/CellphoneTraffic/SignIn",
+                type: "POST",
+                data: { uid: 'A4F86B43-F6EF-4867-A961-532DCEB016B6' },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+
+            $.ajax({
+                url: "http://192.168.3.95:8123/lx/CellphoneTraffic/Main",
+                type: "POST",
+                data: { uid: 'A4F86B43-F6EF-4867-A961-532DCEB016B6' },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+            $.ajax({
+                url: "http://192.168.3.95:8123/lx/CellphoneTraffic/TrafficPay",
+                type: "POST",
+                data: { uid: 'A4F86B43-F6EF-4867-A961-532DCEB016B6', proId: 1 },
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+
+            $.ajax({
+                url: "http://192.168.3.95:8123/lx/Film/main",
+                type: "POST",
+                data: { uid: 'A4F86B43-F6EF-4867-A961-532DCEB016B6'},
+                success: function (a) {
+                    console.log(JSON.stringify(a));
+                }
+            });
+
+*/ 
+
+        });
+
+    </script>
+}

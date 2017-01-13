@@ -1,0 +1,112 @@
+﻿@model Sys_Admin
+@{
+    ViewBag.Title = "编辑个人资料";
+    ViewBag.ParentUrl = "/admin/info/";
+}
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="@Url.Action("Index","Console")">控制台</a>
+            </li>
+            <li class="active">个人信息</li>
+        </ul><!-- .breadcrumb -->
+    </div>
+
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+
+                <form class="form-horizontal" role="form" method="POST" id="frm">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right"> 账号 </label>
+
+                        <div class="col-sm-9">
+                            <label>@Model.A_Account</label>
+                            @Html.HiddenFor(o => o.A_Id)
+                        </div>
+                    </div>
+
+                    @* <div class="space-4"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 角色 </label>
+
+                            <div class="col-sm-9">
+                                管理员
+                            </div>
+                        </div>
+
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 密码 </label>
+
+                                            <div class="col-sm-9">
+                                                <input type="text" id="form-field-1" placeholder="密码" class="col-xs-10 col-sm-5">
+                                            </div>
+                                        </div>
+                    *@
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="A_Name"> 姓名 </label>
+
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(o => o.A_Name, new { placeholder = "姓名", @class = "col-xs-10 col-sm-5", required = "required", data_max = "16" })
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="A_Phone"> 联系电话 </label>
+
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(o => o.A_Phone, new { placeholder = "联系电话", @class = "col-xs-10 col-sm-5", required = "required", data_max = "16" })
+
+                        </div>
+                    </div> 
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="A_Remark"> 备注 </label>
+
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(o => o.A_Remark, new { placeholder = "备注", @class = "col-xs-10 col-sm-5", data_max = "50" })
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                提交
+                            </button>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                重置
+                            </button>
+                            <code>@ViewBag.Tip</code>
+                        </div>
+                    </div>
+
+                    <div class="hr hr-24"></div>
+                </form>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div>
+@section footer{
+    <script src="/assets/js/validation/jquery-html5Validate.js"></script>
+    <script>
+        $("#frm").html5Validate(function () {
+            this.submit();
+        }, {
+            // novalidate: false,
+            // labelDrive: false
+        });
+    </script>
+}

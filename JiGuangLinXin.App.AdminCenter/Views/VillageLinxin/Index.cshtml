@@ -1,0 +1,225 @@
+﻿@model PagedList<Core_Village>
+@{
+    ViewBag.ParentUrl = "/VillageLinxin/Index";
+    ViewBag.Title = "邻信小区管理";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="widget-box">
+            <div class="widget-header">
+                <h4 class="widget-title">高级搜索</h4>
+
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+
+                    <a href="#" data-action="close">
+                        <i class="ace-icon fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <form class="form-search" method="GET">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                <label for="province">
+                                    省
+                                </label>
+                                <div>
+                                    @Html.DropDownList("province", (IEnumerable<SelectListItem>)TempData["ProvinceList"], new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3">
+                                <label for="et">
+                                    市
+                                </label>
+
+                                <div id="divCity">
+                                    <select class="form-control" id="areaCity" name="areaCity">
+                                        <option value="0">==请选择==</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <label for="areaDistrict">
+                                    区/县
+                                </label>
+
+                                <div id="divDis">
+                                    <select class="form-control" id="areaDistrict" name="areaDistrict">
+                                        <option value="0">==请选择==</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <label for="key">
+                                    小区名称
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control search-query" value="@Request.QueryString["key"]" placeholder="如：金科十年城" id="key" name="key">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-purple btn-sm">
+                                            查询
+                                            <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">邻信平台所有小区</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <code>目前小区总数：@ViewBag.TotalCount 个</code>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                <form class="form-search">
+                    @*<span class="">
+                        <input type="text" placeholder="小区名称(如，龙湖西苑)" class="nav-search-input col-xs-10 col-sm-5" id="key" name="key" value="@Request.QueryString["key"]">
+                    </span>
+                    <button type="submit" class="btn btn-info btn-xs">
+                        <i class="ace-icon fa fa-search bigger-110"></i>
+                        搜索
+                    </button>*@
+                    <a class="btn btn-xs btn-success" href="@Url.Action("Edit", "VillageLinxin")">
+                        <i class="ace-icon glyphicon glyphicon-plus bigger-110"></i>
+                        新增小区
+                    </a>
+                </form>
+            </div><!-- #nav-search -->
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>唯一编号</th>
+                        <th>小区名</th>
+                        <th>所属城市</th>
+                        <th>小区类型</th>
+                        <th>热门？</th>
+                        <th>合作？</th>
+                        <th class="hidden-480">
+                            <i class="ace-icon fa fa-flag bigger-110 hidden-480"></i>
+                            标签
+                        </th>
+                        <th class="hidden-480">详细地址</th>
+                        <th>状态</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.V_Id</td>
+                            <td>@obj.V_BuildingName</td>
+                            <td>@obj.V_CityName ， @obj.V_DistrictName</td>
+                            <td>@obj.V_Architecture</td>
+                            <td>@UtilPartialView.YesOrNo("是", "否", obj.V_Hot == 0)</td>
+                            <td>@UtilPartialView.YesOrNo("是", "否", obj.V_Consociation== 0)</td>
+                            <td class="hidden-480">@obj.V_Tags</td>
+                            <td>@obj.V_BuildingAddress</td> 
+                            <td>@UtilPartialView.OkOrError("正常", "已删除", obj.V_State == 0)</td>
+
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="编辑信息" href="/VillageLinxin/Edit/@obj.V_Id">
+                                        编辑小区
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+                                    @*<a class="btn btn-xs btn-success tooltip-success" data-rel="tooltip" data-placement="top" title="查看详情" href="/VillageLinxin/Info/@obj.V_Id">
+                                        <i class="ace-icon fa fa-eye bigger-120"></i>
+                                    </a>*@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="10" align="right">
+                            <code>筛选结果共计：@ViewBag.CurrentCount 个</code>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "id", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script>
+        $(function() {
+            //点击省份
+            $(document).on("change", "#province", function (o) {
+                
+                var ele = $('#province');
+                var sel = ele.val();
+                if (sel != "0") {
+                    $.post("/VillageLinxin/GetCityListByProvince", { areaCode: sel }, function (o) {
+                        //console.log(o);
+                        var city = eval(o);
+                        if (city.length > 0) {
+                            var html = '<select id="areaCity" name="areaCity" class = "form-control">';
+                            $.each(city, function (i, o) {
+                                html += '<option value="' + o.Value + '">' + o.Text + '</option>';
+                            });
+                            html += '</select>';
+                            $('#divCity').html(html);
+                        }
+                    });
+                }
+            });
+            //点击市区
+            $(document).on("change", "#areaCity", function (o) {
+                var ele = $('#areaCity');
+                var sel = ele.val();
+                // console.log(ele.val() + '**'+ele.find("option:selected").text());
+                if (sel != "0") {
+                    $.post("/VillageLinxin/GetDistrictListByCity", { areaCode: sel }, function (o) {
+                        //console.log(o);
+                        var city = eval(o);
+                        if (city.length > 0) {
+                            var html = '<select id="areaDistrict" name="areaDistrict" class = "form-control">';
+                            $.each(city, function (i, o) {
+                                html += '<option value="' + o.Value + '">' + o.Text + '</option>';
+                            });
+                            html += '</select>';
+                            $('#divDis').html(html);
+                        }
+                    });
+                } else {
+
+                }
+            });
+        });
+    </script>
+}

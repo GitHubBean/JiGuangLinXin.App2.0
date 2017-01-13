@@ -1,0 +1,579 @@
+﻿
+<div id="sidebar" class="sidebar responsive">
+    <script type="text/javascript">
+        try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
+    </script>
+
+    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+            <button class="btn btn-success">
+                <i class="ace-icon fa fa-signal"></i>
+            </button>
+
+            <button class="btn btn-info">
+                <i class="ace-icon fa fa-pencil"></i>
+            </button>
+
+            <!-- #section:basics/sidebar.layout.shortcuts -->
+            <button class="btn btn-warning">
+                <i class="ace-icon fa fa-users"></i>
+            </button>
+
+            <button class="btn btn-danger">
+                <i class="ace-icon fa fa-cogs"></i>
+            </button>
+
+            <!-- /section:basics/sidebar.layout.shortcuts -->
+        </div>
+
+        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+            <span class="btn btn-info"></span>
+            <span class="btn btn-warning"></span>
+            <span class="btn btn-danger"></span>
+        </div>
+    </div><!-- /.sidebar-shortcuts -->
+
+    <ul class="nav nav-list">
+        <li class="active" name="menu">
+            <a href="/Console/Index">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text"> 控制台 </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+
+        <li name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-desktop"></i>
+                <span class="menu-text">
+                    审核管理
+                    <!-- #section:basics/sidebar.layout.badge -->
+                    <span class="badge badge-transparent tooltip-error" title="核心数据，请务必谨慎操作">
+                        <i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
+                    </span>
+
+                    <!-- /section:basics/sidebar.layout.badge -->
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Check/UserReg" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        用户社区认证
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Check/GroupManager" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        群主申请审核
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Check/CashingOut" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        提现申请审核
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-home"></i>
+                <span class="menu-text">
+                    小区楼盘
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/VillageBuilding/Building" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        所有楼盘
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/VillageBuilding/BuildingEdit" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        新增楼盘
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/VillageLinxin/Index" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        所有小区
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/VillageLinxin/Edit" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        编辑小区
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-cutlery"></i>
+                <span class="menu-text">
+                    活动管理
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Activity/Index" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        所有活动
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Activity/Edit" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        新增活动
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Activity/Goods">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        活动商品
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Activity/Order">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        活动订单
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li>
+                    <a href="/Activity/Join">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        活动报名
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-heart"></i>
+                <span class="menu-text">
+                    邀约管理
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Invite/Index" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        所有邀约
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Invite/Join" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        邀约报名
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Invite/Comment">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        邀约评论
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Invite/Group">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        圈子管理
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-users"></i>
+                <span class="menu-text">
+                    用户管理
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/User/Index" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        所有会员
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Developer/Index" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        所有开发商
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Developer/Edit" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        新增开发商
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-credit-card"></i>
+                <span class="menu-text">
+                    账单流水
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Bill/Platform" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        平台账单
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Bill/User" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        用户账单
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Bill/Alipay" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        支付宝账单
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-comments"></i>
+                <span class="menu-text">
+                    消息管理
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Message/Index" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        所有消息
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Message/Push" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        推送消息
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-gift"></i>
+                <span class="menu-text">
+                    红包管理
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/LuckGift/Developer" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        楼盘红包
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/LuckGift/Chat" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        聊天红包
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/LuckGift/BackOrder">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        红包退款记录
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-signal"></i>
+                <span class="menu-text">
+                    统计分析
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Statistical/User" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        会员量统计
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Statistical/Consume" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        便民消费统计
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li>
+                    <a href="/Statistical/LuckGift" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        红包量统计
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li>
+                    <a href="/Statistical/Invite" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        邀约量统计
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Statistical/GoodsOrder" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        商品订单统计
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-bullhorn"></i>
+                <span class="menu-text">
+                    广告管理
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Ad/Index" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        所有广告
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Ad/Edit" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        新增广告
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-cloud"></i>
+                <span class="menu-text">
+                    聚合管理
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Juhe/Unit" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        缴费机构
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Juhe/Order" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        聚合订单
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        <li  name="menu">
+            <a href="###" class="dropdown-toggle">
+                <i class="menu-icon fa fa-cogs"></i>
+                <span class="menu-text">
+                    系统管理
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li>
+                    <a href="/Admin/Index" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        帐号管理
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Admin/Edit" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        新建帐号
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li>
+                    <a href="/Config/Instructions" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        协议配置
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <li>
+                    <a href="/Log/Operation" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        操作日志
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                <li>
+                    <a href="/Log/Error" name="am">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        错误日志
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+    </ul><!-- /.nav-list -->
+    <!-- #section:basics/sidebar.layout.minimize -->
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+
+    <!-- /section:basics/sidebar.layout.minimize -->
+    <script type="text/javascript">
+        try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
+    </script>
+</div>

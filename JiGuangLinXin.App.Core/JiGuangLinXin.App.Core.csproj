@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B08E281F-A384-4861-8539-3BCC1AA7EB60}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JiGuangLinXin.App.Core</RootNamespace>
+    <AssemblyName>JiGuangLinXin.App.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\JiGuangLinXin.App.Entities\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\JiGuangLinXin.App.Entities\bin\Debug\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\JiGuangLinXin.App.Entities\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ScoreCore.cs" />
+    <Compile Include="BillboardCore.cs" />
+    <Compile Include="CellphoneTrafficCore.cs" />
+    <Compile Include="HotlineCore.cs" />
+    <Compile Include="PrizeCore.cs" />
+    <Compile Include="AppVersionCore.cs" />
+    <Compile Include="CheckHistoryCore.cs" />
+    <Compile Include="GroupbuyCore.cs" />
+    <Compile Include="IndexRecommendCore.cs" />
+    <Compile Include="AdSystemCore.cs" />
+    <Compile Include="BusinessEnteringApplyCore.cs" />
+    <Compile Include="BusinessServiceCore.cs" />
+    <Compile Include="DiscountRateCore.cs" />
+    <Compile Include="EventScopeCore.cs" />
+    <Compile Include="ActivityApplyCore.cs" />
+    <Compile Include="ActivityCore.cs" />
+    <Compile Include="ActivityGoodsCore.cs" />
+    <Compile Include="ActivityGoodsOrderCore.cs" />
+    <Compile Include="EventViewCore.cs" />
+    <Compile Include="GroupAlbumPicCore.cs" />
+    <Compile Include="AlbumCore.cs" />
+    <Compile Include="AdminCore.cs" />
+    <Compile Include="AlipayOrderCore.cs" />
+    <Compile Include="AttachmentCore.cs" />
+    <Compile Include="AuditingCashCore.cs" />
+    <Compile Include="AuditingGroupManangerCore.cs" />
+    <Compile Include="AuditingVillageCore.cs" />
+    <Compile Include="BalanceCore.cs" />
+    <Compile Include="BaseInfoCore.cs" />
+    <Compile Include="BillMasterCore.cs" />
+    <Compile Include="BillMemberCore.cs" />
+    <Compile Include="BuidingCubeCore.cs" />
+    <Compile Include="BuildingActivityCore.cs" />
+    <Compile Include="BuildingCore.cs" />
+    <Compile Include="BuildingTypeCore.cs" />
+    <Compile Include="BusDeveloperCore.cs" />
+    <Compile Include="BusinessCore.cs" />
+    <Compile Include="BusinessVillageCore.cs" />
+    <Compile Include="ChinapayDeptCore.cs" />
+    <Compile Include="ChinapayOrderCore.cs" />
+    <Compile Include="ChinapayOrder_bkCore.cs" />
+    <Compile Include="CityCore.cs" />
+    <Compile Include="CommentsCore.cs" />
+    <Compile Include="DbErrorLogCore.cs" />
+    <Compile Include="DeliveryAddressCore.cs" />
+    <Compile Include="DeveloperCore.cs" />
+    <Compile Include="DistrictCore.cs" />
+    <Compile Include="ErrorLogCore.cs" />
+    <Compile Include="EventApplyCore.cs" />
+    <Compile Include="EventCore.cs" />
+    <Compile Include="EventGatherLikeCore.cs" />
+    <Compile Include="EventJoinHistoryCore.cs" />
+    <Compile Include="EventVoteItemCore.cs" />
+    <Compile Include="FeedbackCore.cs" />
+    <Compile Include="InteractiveCore.cs" />
+    <Compile Include="InviteApplyCore.cs" />
+    <Compile Include="InviteCore.cs" />
+    <Compile Include="InviteGroupCore.cs" />
+    <Compile Include="InviteReplyCore.cs" />
+    <Compile Include="JuheDeptCore.cs" />
+    <Compile Include="JuheOrderCore.cs" />
+    <Compile Include="LifestyleOrderCore.cs" />
+    <Compile Include="LifestyleServicesCore.cs" />
+    <Compile Include="LifestyleServicesLikeCore.cs" />
+    <Compile Include="LifestyleTypeCore.cs" />
+    <Compile Include="LikesCore.cs" />
+    <Compile Include="LuckyGiftBackOrderCore.cs" />
+    <Compile Include="LuckyGiftCore.cs" />
+    <Compile Include="LuckyGiftDetailCore.cs" />
+    <Compile Include="LuckyGiftHistoryCore.cs" />
+    <Compile Include="MallGoodsCore.cs" />
+    <Compile Include="MallOrderCore.cs" />
+    <Compile Include="MallTypeCore.cs" />
+    <Compile Include="MalShoppingCarCore.cs" />
+    <Compile Include="MessageCenterCore.cs" />
+    <Compile Include="MessageCore.cs" />
+    <Compile Include="NoticeCore.cs" />
+    <Compile Include="OperateLogCore.cs" />
+    <Compile Include="OwnerCardCodeCore.cs" />
+    <Compile Include="OwnerCardHistoryCore.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvinceCore.cs" />
+    <Compile Include="ShoppingCarViewCore.cs" />
+    <Compile Include="ShowcaseCore.cs" />
+    <Compile Include="TopicCore.cs" />
+    <Compile Include="TopicMovieTicketCore.cs" />
+    <Compile Include="UserCore.cs" />
+    <Compile Include="UserFriendCore.cs" />
+    <Compile Include="UserFriendsApplyCore.cs" />
+    <Compile Include="ViewReceiveGiftListCore.cs" />
+    <Compile Include="VillageLinxinCore.cs" />
+    <Compile Include="VillageCore.cs" />
+    <Compile Include="VoucherCardCore.cs" />
+    <Compile Include="VoucherCardHistoryCore.cs" />
+    <Compile Include="VoucherCardPostCore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JiGuangLinXin.App.Entities\JiGuangLinXin.App.Entities.csproj">
+      <Project>{3bae5bc5-9cd7-47b3-8c6e-5b666ee8e5f4}</Project>
+      <Name>JiGuangLinXin.App.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiGuangLinXin.App.Log\JiGuangLinXin.App.Log.csproj">
+      <Project>{4fef4012-8ce2-488b-b478-90125ec083f0}</Project>
+      <Name>JiGuangLinXin.App.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiGuangLinXin.App.Provide\JiGuangLinXin.App.Provide.csproj">
+      <Project>{dfaafe40-1c4c-45d9-9529-c81724c09b5c}</Project>
+      <Name>JiGuangLinXin.App.Provide</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiGuangLinXin.App.Services\JiGuangLinXin.App.Services.csproj">
+      <Project>{012bce04-1ab7-4946-923b-7210c987cf80}</Project>
+      <Name>JiGuangLinXin.App.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

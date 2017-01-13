@@ -1,0 +1,143 @@
+﻿@model PagedList<Core_AuditingCash>
+@{
+    ViewBag.ParentUrl = "/Check/CashingOut";
+    ViewBag.Title = "用户/商家提现申请审核";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">商家、用户提现申请，目前默认全是提现到支付宝</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                <form class="form-search">
+                    <span class="">
+                        <input type="text" placeholder="用户昵称/电话号码/帐号 关键字搜索" class="nav-search-input col-xs-10 col-sm-5" style="width: 280px;" id="key" name="key" value="@Request.QueryString["key"]">
+                    </span>
+                    <button type="submit" class="btn btn-info btn-xs">
+                        <i class="ace-icon fa fa-search bigger-110"></i>
+                        搜索
+                    </button>
+                </form>
+            </div><!-- #nav-search -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>帐号</th>
+                        <th>金额</th>
+                        <th>电话</th>
+                        <th>提现方式</th>
+                        <th>角色</th>
+                        <th>状态</th>
+                        <th class="hidden-480">申请时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.M_BankName</td>
+                            <td>@obj.M_BankAccount</td>
+                            <td>@obj.M_Money.ToString("N")</td>
+                            <td>@obj.M_Phone</td>
+                            <td>@UtilPartialView.YesOrNo("支付宝", "银行", obj.M_Flag == 1)</td>
+                            <td>@UtilPartialView.YesOrNo("商家", "用户", obj.M_Role != (int)MemberRoleEnum.商家)</td>
+                            <td>
+                                @if (obj.M_Status == 1)
+                                {
+                                    <span class="label label-success">提现成功</span>
+                                }
+                                else if (obj.M_Status == 2)
+                                {
+                                    <span class="label label-danger">提现失败</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-primary">等待审核</span>
+                                }
+
+                                @*@Enum.GetName(typeof(AuditingEnum), obj.M_Status)*@
+                            </td>
+                            <td class="hidden-480">@obj.M_Time</td>
+
+                            <td>
+                                @if (obj.M_Status == (int)AuditingEnum.未认证)
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-success tooltip-success" data-rel="tooltip" data-placement="top" title="通过审核" href="###" data-val="@obj.M_Id" onclick="oper('@obj.M_Id',1)">
+                                            通过
+                                            <i class="ace-icon glyphicon glyphicon-ok bigger-120"></i>
+                                        </a>
+                                        <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="审核不通过" href="###" data-val="@obj.M_Id" onclick="oper('@obj.M_Id',2)">
+                                            拒绝
+                                            <i class="ace-icon glyphicon glyphicon-remove bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="查看改用户的账单详情" href="/bill/user/@obj.M_UId" >
+                                        查看账单
+                                        <i class="ace-icon fa fa-eye bigger-120"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "id", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        function oper(id, state) {
+            var tips = '拒绝提现申请，请填写备注，最多50字！';
+            if (state === 1) { //同意
+                tips = '同意提现申请，请填写备注，最多50字！';
+            }
+            bootbox.prompt(tips, function (rs) {
+                if (rs != null && rs.length > 50) {
+                    bootbox.alert("字数超出限制");
+                    return;
+                }
+                if (rs) {
+                    $.post('/Check/CashingOutAuditing', { id: id, state: state, tips: rs }, function (o) {
+                        if ('ok' == o) {
+                            bootbox.alert("操作成功！", function () {
+                                //window.location.reload();
+                                location.reload();
+                            });
+                        } else {
+                            bootbox.alert("操作有误！");
+                        }
+                    });
+                } else {
+                    bootbox.alert("请填写操作备注");
+                    return;
+                }
+            });
+
+
+        }
+    </script>
+}

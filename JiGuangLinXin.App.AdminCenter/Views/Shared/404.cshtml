@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="refresh" content="15;URL=/" />
+        <meta content="IE=7.0000" http-equiv="X-UA-Compatible">
+        <title>@string.Format("{0}-{1}",ViewBag.Title,ViewBag.SiteName)</title>
+        <meta name="keywords" content="@ViewBag.Keywords" />
+        <meta name="description" content="@ViewBag.Description" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <style type="text/css">
+            BODY
+            {
+                padding-bottom: 0px;
+                background-color: #21538c;
+                margin: 0px;
+                padding-left: 0px;
+                padding-right: 0px;
+                color: #333;
+                padding-top: 0px;
+            }
+            #windiv
+            {
+                background-image: url(/static/images/win007_r3_c1_s1.jpg);
+                position: relative;
+                padding-bottom: 40px;
+                padding-left: 50px;
+                padding-right: 50px;
+                background-repeat: repeat-y;
+                height: 230px;
+                padding-top: 40px;
+            }
+            #winlogo
+            {
+                background-image: url(/static/images/404banner.png);
+                position: absolute;
+                width: 200px;
+                background-repeat: no-repeat;
+                height: 340px;
+                left: 26px;
+            }
+            #text
+            {
+                position: absolute;
+                border-left: #d7d7d7 1px dotted;
+                line-height: 28px;
+                padding-left: 30px;
+                font-family: "微软雅黑";
+                color: #333;
+                font-size: 16px;
+                top: 35px;
+                left: 248px;
+            }
+        </style>
+        <meta name="GENERATOR" content="MSHTML 8.00.7601.18487">
+    </head>
+<body>
+    <div style="margin: 80px auto 0px; width: 854px">
+        <div style="clear: both">
+            <img src="/static/images/win007_r1_c1_s1.gif" width="854" height="48"></div>
+        <div id="windiv">
+            <div id="winlogo">
+            </div>
+            <div id="text">
+                <div>
+                    <strong>尊敬的用户：</strong><br>
+                    Oh,您请求的数据貌似有异常哦<br>
+                    为能体验更好的效果:<br>
+                    请返回到 <a style="color: red" href="@ViewBag.Url">首页</a>（用户请按Ctrl+D 收藏）&nbsp;<br>
+                    <br>
+                    感谢您的支持，我们将一如既往的竭诚为您服务！&nbsp; <span id="show"><span id="time" style="color:#ff6600;font-size: 20px;font-weight: bold;">15</span> 秒后自动跳转...</span><br>
+                    <br>
+                    <div style="text-align: center; line-height: 22px; float: right; color: #666; font-size: 15px;padding: 10px;">
+                        @ViewBag.SiteName&nbsp;<br>
+                        @DateTime.Now.ToShortDateString()</div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both">
+            <img src="/static/images/win007_r7_c1_s1.jpg" width="854" height="37"></div>
+    </div>
+    
+    <script type="text/javascript">
+        window.load = directTime(15);
+        function directTime(t) {
+            var time = setInterval(function () {
+                document.getElementById("time").innerHTML = --t;
+                if (t < 1) {
+                    window.clearInterval(time);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

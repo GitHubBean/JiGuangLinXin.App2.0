@@ -1,0 +1,164 @@
+﻿@model Core_Building
+@{
+    Layout = null;
+    ViewBag.Title = "邻信." + Model.B_Name + "." + ViewBag.Tips;
+}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <meta name="description" itemprop="description" id="description" content="@Model.B_Desc">
+    <meta name="renderer" content="webkit">
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="format-detection" content="email=no" />
+    <link rel="stylesheet" data-href="/html/building/build/main.css?14701943427642" />
+    <script>window.imgMap = { "building_sprite.png": 1, "downloadClose.png": 0, "footerbg.png": 0, "hbimg1.png": 1, "hbimg2.png": 1, "jieshao1.png": 0, "jieshao2.png": 0, "jieshao3.png": 0, "jieshao4.png": 0, "jieshao5.png": 0, "logo.png": 1, "marqueebg.png": 1, "phone.png": 0, "xiaocaishen.png": 1, "yzk100.png": 1, "yzk300.png": 1, "yzk500.png": 1 }; window.spriteImgSize = [88, 56, 4];</script>
+    <script>        function webpsupport(t) { var e = window.localStorage; if ("function" != typeof t && (t = function () { }), void 0 != e && void 0 != e._tmtwebp && 0 == e._tmtwebp) return t(), !1; if (void 0 != e && void 0 != e._tmtwebp && 1 == e._tmtwebp) return t(1), !0; var A = new Image; A.src = "data:image/webp;base64,UklGRk4AAABXRUJQVlA4WAoAAAAQAAAAAQAAAQAAQUxQSA0AAAABB1DAiP4HIqL/AQAAAFZQOCAaAAAAMAEAnQEqAgACAAAADCWkAANwAP7/YBgAAAA=", A.onload = function () { return 2 != A.height ? (void 0 != e && (e._tmtwebp = 0), t(), !1) : (void 0 != e && (e._tmtwebp = 1), t(1), !0) }, A.onerror = function () { return void 0 != e && (e._tmtwebp = 0), t(), !1 } } !function () { function t(t) { var e = document.getElementsByTagName("link"); window.isWebpSupport = !1; for (var A = 0, r = e.length; A < r; A++) t ? (e[A].href = e[A].getAttribute("data-href").replace(".css", ".webp.css"), isWebpSupport = !0) : e[A].href = e[A].getAttribute("data-href"); window.addEventListener("load", function () { var t = document.querySelectorAll("img"), e = t.length, A = 0, r = ""; for (A = 0; A < e; A++) for (r in imgMap) if (t[A].dataset.src.indexOf(r) >= 0) { 1 === imgMap[r] && isWebpSupport ? t[A].src = t[A].dataset.src.replace(/\.(jpg|gif|png)$/i, ".webp") : t[A].src = t[A].dataset.src; break } }) } webpsupport(t) }();</script>
+    <body class="pageLoader">
+        <div style="display: none">
+            <img id="webShareImg" data-src="@string.Format("{0}{1}", ViewBag.StaticUrl,Model.B_CovereImg)" alt="@Model.B_Name">
+        </div>
+        <div class="contentBody" id="contentBody">
+            <div class="pageLoader" id="pageLoader">
+                <div class="square-spin">
+                    <div></div>
+                </div>
+            </div>
+            <div class="pageHidden" id="pageHidden">
+                <div id="pageTextHidden" style="visibility: hidden">
+                    <div class="media">
+                        <div class="poster">
+                            <img id="poster" width="100%" data-src="">
+                        </div>
+                        <video id="video" controls></video>
+                    </div>
+                    <div class="marquee" id="marquee">
+                        <img class="bg" data-src="img/marqueebg.png" width="100%">
+                        <div class="textBox"><span class="text"></span></div>
+                        <div class="textLength"></div>
+                    </div>
+                    <div class="hongbao">
+                        <div class="contentRange"></div>
+                    </div>
+                    <div class="introduceBox">
+                        <div class="introduce contentRange" id="cube">
+                            <img class="titleImg" data-src="img/jieshao1.png" alt="全景户型">
+                            <div class="images">
+                                <a class="imgBox">
+                                    <img class="img" data-src="" data-index="0">
+                                    <div class="title"></div>
+                                </a>
+                                <a class="imgBox">
+                                    <img class="img" data-src="" data-index="1">
+                                    <div class="title"></div>
+                                </a>
+                                <a class="imgBox">
+                                    <img class="img" data-src="" data-index="2">
+                                    <div class="title"></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="introduce contentRange" id="landscape">
+                            <img class="titleImg" data-src="img/jieshao2.png" alt="景观漫游">
+                            <div class="introduce">
+                                <p class="text"></p>
+                                <div class="images imgParent">
+                                    <div class="imgBox viewImageShow" data-index="0">
+                                        <img class="img" data-src="">
+                                    </div>
+                                    <div class="imgBox viewImageShow" data-index="1">
+                                        <img class="img" data-src="">
+                                    </div>
+                                    <div class="imgBox viewImageShow" data-index="2">
+                                        <img class="img" data-src="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="introduce contentRange" id="location">
+                            <img class="titleImg" data-src="img/jieshao3.png" alt="区位展示">
+                            <p class="text"></p>
+                            <div class="swiper">
+                                <div id="locationSwiper" class="swiper-container">
+                                    <div class="swiper-wrapper"></div>
+                                </div>
+                                <div class="pagination locationPagination"></div>
+                            </div>
+                        </div>
+                        <div class="introduce contentRange" id="planning">
+                            <img class="titleImg" data-src="img/jieshao4.png" alt="建筑规划">
+                            <p class="text"></p>
+                            <div class="images imgParent">
+                                <div class="imgBox viewImageShow" data-index="0">
+                                    <img class="img" data-src="">
+                                </div>
+                                <div class="imgBox viewImageShow" data-index="1">
+                                    <img class="img" data-src="">
+                                </div>
+                                <div class="imgBox viewImageShow" data-index="2">
+                                    <img class="img" data-src="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="introduce contentRange" id="property">
+                            <img class="titleImg" data-src="img/jieshao5.png" alt="物业配套">
+                            <p class="text"></p>
+                            <div class="swiper">
+                                <div id="propertySwiper" class="swiper-container">
+                                    <div class="swiper-wrapper"></div>
+                                </div>
+                                <div class="pagination propertyPagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadowBox"></div>
+                    <div class="card">
+                        <ul class="cardList">
+                            <li>
+                                <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.linxin.lx">
+                                    <img data-src="img/yzk500.png" width="190" alt="业主卡500">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.linxin.lx">
+                                    <img data-src="img/yzk300.png" width="190" alt="业主卡300">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.linxin.lx">
+                                    <img data-src="img/yzk100.png" width="190" alt="业主卡100">
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="businessPhone">
+                        <div class="contentRange">
+                            <div class="phone"><img data-src="img/phone.png" width="50%" alt="电话"></div>
+                            <div class="phoneNo" id="phone"></div>
+                        </div>
+                    </div>
+                    <div id="viewImage" class="viewImage hidden">
+                        <div class="mask" id="mask"></div>
+                        <div class="swiper">
+                            <div id="viewSwiper" class="swiper-container">
+                                <div class="swiper-wrapper"></div>
+                            </div>
+                            <div class="pagination viewPagination"></div>
+                        </div>
+                    </div>
+                    <div id="hidData" style="display: none;">@ViewBag.Data</div>
+                </div>
+            </div>
+        </div>
+        <script src="/html/building/build/main.js?146779252039652"></script>
+    </body>
+</html>

@@ -1,0 +1,193 @@
+﻿@using System.Configuration
+@model Core_AuditingVillage
+@{
+    ViewBag.ParentUrl = "/Check/UserReg";
+    ViewBag.Title = "通过认证";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li>
+            <a href="/Check/UserReg">社区认证</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="user-profile row col-xs-12">
+
+    <h4 class="pink">
+        <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+        <a href="###" role="button" class="green" data-toggle="modal">审核用户社区认证</a>
+    </h4>
+
+    <div class="hr hr-18 dotted hr-double"></div>
+    <div class="profile-user-info profile-user-info-striped">
+        <div class="profile-info-row">
+            <div class="profile-info-name"> 姓名： </div>
+
+            <div class="profile-info-value">
+                <span>@Model.A_TrueName</span>
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> 电话： </div>
+
+            <div class="profile-info-value">
+                <span>@Model.A_UPhone</span>
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> 核查小区： </div>
+
+            <div class="profile-info-value">
+                <input type="text" value="@Model.A_BuildingId" id="txtBdId" class="col-xs-5 col-sm-5" placeholder="小区的唯一编码" />
+
+                <div class="editable-buttons">
+                    <a class="btn btn-xs btn-warning tooltip-warning" data-rel="tooltip" data-placement="top" title="检测小区是否存在" href="###" id="ckBuilding">
+                        <i class="ace-icon fa fa-info bigger-120"></i>
+                    </a>
+                </div>
+
+                <span id="tp"></span>
+                <input type="hidden" id="vId" value="@Model.A_Id" />
+                <input type="hidden" id="vBdId" value="" />
+
+
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> 附件： </div>
+
+            <div class="profile-info-value">
+                <span>
+                    @if (!string.IsNullOrEmpty(Model.A_ImgBuilding))
+                    {
+                        <img src="@string.Format("{0}{1}", ConfigurationManager.AppSettings["ImgSiteUrl"], Model.A_ImgBuilding)" width="150" />
+
+                    },
+                    @if (!string.IsNullOrEmpty(Model.A_ImgFee))
+                    {
+                        <img src="@string.Format("{0}{1}", ConfigurationManager.AppSettings["ImgSiteUrl"], Model.A_ImgFee)" width="150" />
+                    }
+                </span>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> 门牌号： </div>
+
+            <div class="profile-info-value">
+                <span>@Model.A_DoorNo</span>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> 申请时间： </div>
+
+            <div class="profile-info-value">
+                <span>@Model.A_Time</span>
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> 申请的小区： </div>
+
+            <div class="profile-info-value">
+                <span>@Model.A_BuildingName</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" type="button" id="btnOk">
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                审核通过
+            </button>
+
+            &nbsp; &nbsp;
+            <button class="btn btn-danger" type="button" id="btnCancel">
+                <i class="ace-icon glyphicon glyphicon-remove bigger-110"></i>
+                审核不通过
+            </button>
+            &nbsp; &nbsp;
+            <a class="btn" href="/Check/UserReg">
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                返回
+            </a>
+        </div>
+    </div>
+</div>
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //检查小区是否存在
+            $('#ckBuilding').on('click', function () {
+                var sn = $('#txtBdId').val().trim();
+                if (sn != '') {
+                    $.post('/Check/BuildingNameIsExist', { sName: sn }, function (o) {
+                        if ('err' == o) {
+                            $('#tp').html("<span class='label label-sm label-warning'>小区不存在!</span>");
+                            $('#vBdId').val('');
+
+                        } else {
+                            $('#tp').html("<span class='label label-sm label-success'>小区存在!***" + o + "</span>");
+                            $('#vBdName').html(o);
+                            $('#vBdId').val(sn);
+                        }
+                    });
+                } else {
+                    bootbox.alert("请输入正确的小区唯一编码！", function () {
+                    });
+                    return;
+                }
+            });
+
+            //通过审核
+            $('#btnOk').on('click', function () {
+                var vBdId = $('#vBdId').val();
+                if (vBdId == '') {
+                    bootbox.alert("请先确认小区是否存在！", function () {
+                    });
+                    return;
+                }
+                $.post('/Check/Auditing', { id: $('#vId').val(), buildId: vBdId, state: 1 }, function (o) {
+                    console.log(o);
+                    if ('ok' == o) { //成功
+                        bootbox.alert("已通过该实名审核！", function () {
+                            location.href = "/Check/UserReg";
+                        });
+                    } else { //失败
+                        bootbox.alert("实名审核操作失败，请稍后再试！", function () {
+
+                        });
+                    }
+                });
+            });
+            //审核不通过
+            $('#btnCancel').on('click', function () {
+                var tips = '';
+                bootbox.prompt("拒绝用户社区认证", function (rs) {
+                    if (rs) {
+                        tips = rs;
+                        $.post('/Check/Auditing', { id: $('#vId').val(), state: 2, tips: tips }, function (o) {
+                            if ('ok' == o) { //成功
+                                bootbox.alert("已拒绝该社区认证！", function () {
+                                    location.href = "/Check/UserReg";
+                                });
+                            } else { //失败
+                                bootbox.alert("实名审核操作失败，请稍后再试！", function () {
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

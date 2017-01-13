@@ -1,0 +1,40 @@
+﻿日志时间：2016/8/10 17:27:55
+日志级别：Error
+日志内容：--【访问地址】:http://192.168.1.172:8125/Film/Building *注：*在执行 controller[Film] 的 action[Building] 时产生异常:【到值类型“System.Int32”的强制转换失败，因为具体化值为 null。结果类型的泛型参数或查询必须使用可以为 null 的类型。】，详情:   在 System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   在 lambda_method(Closure , Shaper )
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   在 System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)
+   在 Webdiyer.WebControls.Mvc.PageLinqExtensions.ToPagedList[T](IQueryable`1 allItems, Int32 pageIndex, Int32 pageSize)
+   在 JiGuangLinXin.App.AdminCenter.Controllers.Prize.FilmController.Building(String id, Int32 pn, Int32 rows, String key) 位置 e:\companyProject\极光邻信App2.0\code\JiGuangLinXin.App2.1\JiGuangLinXin.App2.0\JiGuangLinXin.App.AdminCenter\Controllers\Prize\FilmController.cs:行号 72
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)    ###    【访问来源】:http://192.168.1.172:8125/Film/Index   ###    【访问IP】:192.168.1.172  --------2016/8/10 17:27:55 ##
+******************************
+日志时间：2016/8/10 17:28:46
+日志级别：Error
+日志内容：--【访问地址】:http://192.168.1.172:8125/Film/Building *注：*在执行 controller[Film] 的 action[Building] 时产生异常:【到值类型“System.Int32”的强制转换失败，因为具体化值为 null。结果类型的泛型参数或查询必须使用可以为 null 的类型。】，详情:   在 System.Data.Entity.Core.Common.Internal.Materialization.Shaper.ErrorHandlingValueReader`1.GetValue(DbDataReader reader, Int32 ordinal)
+   在 lambda_method(Closure , Shaper )
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Coordinator`1.ReadNextElement(Shaper shaper)
+   在 System.Data.Entity.Core.Common.Internal.Materialization.Shaper`1.SimpleEnumerator.MoveNext()
+   在 System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)
+   在 Webdiyer.WebControls.Mvc.PageLinqExtensions.ToPagedList[T](IQueryable`1 allItems, Int32 pageIndex, Int32 pageSize)
+   在 JiGuangLinXin.App.AdminCenter.Controllers.Prize.FilmController.Building(String id, Int32 pn, Int32 rows, String key) 位置 e:\companyProject\极光邻信App2.0\code\JiGuangLinXin.App2.1\JiGuangLinXin.App2.0\JiGuangLinXin.App.AdminCenter\Controllers\Prize\FilmController.cs:行号 72
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)    ###    【访问来源】:http://192.168.1.172:8125/Film/Index   ###    【访问IP】:192.168.1.172  --------2016/8/10 17:28:46 ##
+******************************

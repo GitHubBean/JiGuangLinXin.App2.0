@@ -1,0 +1,137 @@
+﻿@model Sys_BaseInfo
+@{
+    ViewBag.Title = "编辑通用设置";
+    ViewBag.ParentUrl = "/BaseInfo/Edit";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.Action("Index","Console")">控制台</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+
+<form class="form-horizontal" role="form" id="frm" method="POST" novalidate="novalidate" action="/BaseInfo/Edit/">
+    <div class="tabbable">
+        <ul class="nav nav-tabs padding-16">
+            <li class="active">
+                <a data-toggle="tab" href="#edit-basic">
+                    <i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+                    设置
+                </a>
+            </li>
+        </ul>
+    </div>
+    @Html.HiddenFor(o => o.B_Id)
+    <div class="tab-content profile-edit-tab-content">
+        <div class="tab-pane in active">
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="B_Code"> 设置类型 </label>
+
+                <div class="col-sm-9">
+                    <span class="label label-important">@Enum.GetName(typeof(ProtocolEnum), int.Parse(Model.B_Code))</span>
+
+                    @*@Html.DropDownListFor(o => o.B_Code, (IEnumerable<SelectListItem>)TempData["Flag"], new { @class = "col-xs-5 col-sm-10", required = "required" })*@
+                    @Html.HiddenFor(o => o.B_Code)
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="B_Title"> 标题 </label>
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.B_Title, new { @class = "col-xs-12 col-sm-10", placeholder = "设置标题", required = "required", data_max = "20" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="B_SubTitle"> 备注/小标题 </label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.B_Title, new { @class = "col-xs-12 col-sm-10", placeholder = "备注/小标题", data_max = "100" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="B_ExProp"> 第三方链接 </label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.B_ExProp, new { @class = "col-xs-12 col-sm-10", placeholder = "外网第三方链接", data_max = "200" })
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="OC_Remark">内容</label>
+
+                <div class="col-sm-9">
+                    @Html.TextAreaFor(o => o.B_Content, new { @class = "col-xs-12 col-sm-10", placeholder = "内容详情"})
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Msg))
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Msg
+                </div>
+            }
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        提交
+                    </button>
+
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+
+    <div class="hr hr-24"></div>
+</form>
+@section footer{
+    <script src="/assets/js/validation/jquery-html5Validate.js"></script>
+    <script src="/js/common.js"></script>
+
+
+    <script type="text/javascript" src="/assets/js/editor/xheditor.min.js"></script>
+    <script type="text/javascript" src="/assets/js/editor/xheditor_lang/zh-cn.js"></script>
+
+    <script>
+        $("#frm").html5Validate(function () {
+            this.submit();
+        }, {
+            // novalidate: false,
+            // labelDrive: false
+
+        });
+
+
+        $(document).ready(function () {
+            $('#B_Content').xheditor({
+                tools: 'full',
+                width: '98%',
+                height: '200px',
+                upImgUrl: '/Editor/UploadFile',
+                upImgExt: 'jpg,jpeg,gif,png'
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,242 @@
+﻿@model PagedList<Core_Feedback>
+@{
+    ViewBag.ParentUrl = "/Feedback/Order";
+    ViewBag.Title = "便民支付账单反馈";
+}
+@section headerCss
+{
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="/assets/css/jquery-ui.min.css" />
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">用户在便民过程中，第三方便民平台（聚合/银联）出现延迟、异常</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>手机号</th>
+                        <th>内容</th>
+                        <td>状态</td>
+                        <th>支付时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.F_Title</td>
+                            <td>@obj.F_Phone</td>
+                            <td>@obj.F_Content</td>
+                            <td>@UtilPartialView.YesOrNo("已处理", "未处理", obj.F_Status == 0)</td>
+                            <td>@obj.F_Time</td>
+                            <td>
+                                @if (obj.F_Status == 0)
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-success tooltip-success" data-rel="tooltip" data-placement="top" title="确认订单退款" href="###" data-val="@obj.F_Id" name="btnBackMoney">
+                                            退款
+                                            <i class="ace-icon glyphicon glyphicon-ok bigger-120"></i>
+                                        </a>
+                                        <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="忽略订单反馈" href="###" data-val="@obj.F_Id" name="btnIgnore">
+                                            忽略
+                                            <i class="ace-icon glyphicon glyphicon-remove bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="查看审核备注" href="###" data-time="@obj.F_ReplyTime" data-notes="@obj.F_Reply" name="showNotes">
+                                            处理结果
+                                            <i class="ace-icon fa fa-comment bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "pn", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+
+    </div><!-- /.col -->
+
+    <div id="dialog-message" class="hide">
+        <p>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="orderNo"> 订单号： </label>
+                <div class="col-sm-9">
+                    <input type="text" id="orderNo" class="col-xs-12 col-sm-10" placeholder="便民订单(流水)号" />
+                </div>
+            </div>
+        </p>
+        <br />
+        <p>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="remark"> 备注： </label>
+                <div class="col-sm-9">
+                    <input type="text" id="remark" class="col-xs-12 col-sm-10" placeholder="审核备注" />
+                </div>
+            </div>
+        </p>
+
+        <br />
+        <br />
+        <p>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right">来源：</label>
+
+                <div class="col-sm-9">
+                    <label class="inline">
+                        <input name="source" type="radio" class="ace" value="1" />
+                        <span class="lbl middle"> 聚合</span>
+                    </label>
+
+                    &nbsp; &nbsp; &nbsp;
+                    <label class="inline">
+                        <input name="source" type="radio" class="ace" value="0" />
+                        <span class="lbl middle"> 银联</span>
+                    </label>
+                </div>
+            </div>
+        </p>
+
+    </div><!-- #dialog-message -->
+
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+
+    <script src="/assets/js/jquery-ui.min.js"></script>
+    <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+
+
+    <script>
+        $(function () {
+            $('a[name="showNotes"]').on('click', function () {
+                bootbox.alert('审核时间：' + $(this).data('time') + '<br/>备注：' + $(this).data('notes'), function () {
+                    //window.location.reload();
+                    location.reload();
+                });
+            });
+
+
+            //override dialog's title function to allow for HTML titles
+            $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+                _title: function (title) {
+                    var $title = this.options.title || '&nbsp;'
+                    if (("title_html" in this.options) && this.options.title_html == true)
+                        title.html($title);
+                    else title.text($title);
+                }
+            }));
+
+            //忽略订单审核
+            $('a[name="btnIgnore"]').on('click', function () {
+                var sid = $(this).data('val');
+                bootbox.confirm("确定忽略此用户的便民订单反馈？", function (o) {
+                    if (o) {
+                        bootbox.prompt("备注：", function (rs) {
+                            if (rs) {
+                                $.post('/Feedback/OrderIgnore', { id: sid, content: rs }, function (o) {
+                                    //alert(o.Msg);
+                                    if ('ok' == o) {
+                                        bootbox.alert("已处理！", function () {
+                                            //window.location.reload();
+                                            location.reload();
+                                        });
+                                    } else {
+                                        bootbox.alert("操作有误！");
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+
+            $('a[name="btnBackMoney"]').on('click', function () {
+
+                var sid = $(this).data('val');
+                //var orderNo = $('#orderNo').val();
+                //var remark = $('#remark').val();
+                //var source = $("input[name='source']:checked").val();
+
+                var dialog = $("#dialog-message").removeClass('hide').dialog({
+                    modal: true,
+                    title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-check'></i> 确认退款</h4></div>",
+                    title_html: true,
+                    width: '600px',
+                    buttons: [
+                        {
+                            text: "忽略",
+                            "class": "btn btn-xs",
+                            click: function () {
+                                $.post('/Feedback/OrderIgnore', { id: sid, content: $('#remark').val() }, function (o) {
+                                    //alert(o.Msg);
+                                    if ('ok' == o) {
+                                        bootbox.alert("已处理！", function () {
+                                            //window.location.reload();
+                                            location.reload();
+                                        });
+                                    } else {
+                                        bootbox.alert("操作有误！");
+                                    }
+                                });
+
+                            }
+                        },
+                        {
+                            text: "退款",
+                            "class": "btn btn-primary btn-xs",
+                            click: function () {
+                                $.post('/Feedback/OrderBackmoney', { id: sid, content: $('#remark').val(), source: $("input[name='source']:checked").val(), orderNo: $('#orderNo').val() }, function (o) {
+                                    //alert(o.Msg);
+                                    if ('ok' == o) {
+                                        bootbox.alert("已处理！", function () {
+                                            //window.location.reload();
+                                            location.reload();
+                                        });
+                                    } else {
+                                        bootbox.alert("操作有误！" + o);
+                                    }
+                                });
+
+                                //$(this).dialog("close");
+                            }
+                        }
+                    ]
+                });
+
+
+            });
+        });
+    </script>
+}

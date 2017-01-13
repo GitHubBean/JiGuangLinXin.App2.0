@@ -1,0 +1,170 @@
+﻿@model PagedList<Sys_AppVersion>
+@{
+    ViewBag.ParentUrl = "/Version/Index";
+    ViewBag.Title = "APP应用安装包版本控制管理";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">APP应用(Android,IOS)各个上架版本</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>标识</th>
+                        <th>文件名</th>
+                        <th>版本号</th>
+                        <th>大小(字节)</th>
+                        <th>备注</th>
+                        <th>时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (obj.V_Flag == 0)
+                                {
+                                    <span class="label label-danger">Android插件</span>
+                                }
+                                else if (obj.V_Flag == 1)
+                                {
+                                    <span class="label label-success">Android</span>
+                                }
+                                else if (obj.V_Flag == 2)
+                                {
+                                    <span class="label label-important">IOS</span>
+                                }
+                            </td>
+                            <td>@obj.V_FileName</td>
+                            <td>@obj.V_Code</td>
+                            <td>@obj.V_Size</td>
+                            <td>@obj.V_Remark</td>
+                            <td>@obj.V_Time</td>
+                            @*<td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="查看本批次业主卡密" href="/apk/download/@obj.V_Id">
+                                            下载
+                                            <i class="ace-icon fa fa-eye bigger-120"></i>
+                                        </a>
+                                    </div>
+                                </td>*@
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="删除版本" href="###" data-val="@obj.V_Id" name="btnOption">
+                                        删除
+                                        <i class="ace-icon glyphicon glyphicon-trash bigger-120"></i>
+                                    </a>
+                                </div>
+
+                                @if (obj.V_State == 0)
+                                {
+
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-warning tooltip-warning" data-rel="tooltip" data-placement="top" title="停用此版本" href="###" data-val="@obj.V_Id" name="btnForzen">
+                                            停用
+                                            <i class="ace-icon glyphicon glyphicon-remove bigger-120"></i>
+                                        </a>
+                                    </div>
+
+                                }
+                                else
+                                {
+
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="停用备注" href="###" data-val="@obj.V_ForzenTips" name="btnTips">
+                                            备注
+                                            <i class="ace-icon glyphicon glyphicon-ok bigger-120"></i>
+                                        </a>
+                                    </div>
+
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "id", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //冻结帐号
+            $('a[name="btnOption"]').on('click', function () {
+                var tid = $(this).data('val');
+                bootbox.confirm("确定删除此版本？", function (o) {
+                    if (o) {
+                        $.post('/Version/Remove', { id: tid }, function (o) {
+                            //alert(o.Msg);
+                            if ('ok' == o) {
+                                bootbox.alert("操作成功！", function () {
+                                    //window.location.reload();
+                                    location.reload();
+                                });
+                            } else {
+                                bootbox.alert("操作有误！" + o);
+                            }
+                        });
+                    }
+                });
+            });
+
+            //冻结
+            $('a[name="btnForzen"]').on('click', function () {
+                var tid = $(this).data('val');
+                bootbox.confirm("确定停用此版本？", function (o) {
+                    if (o) {
+                        bootbox.prompt("备注：", function (rs) {
+                            if (rs) {
+                                $.post('/Version/Forzen', { id: tid, tips: rs }, function (o) {
+                                    //alert(o.Msg);
+                                    if ('ok' == o) {
+                                        bootbox.alert("操作成功！", function () {
+                                            //window.location.reload(); 
+                                            location.reload();
+                                        });
+                                    } else {
+                                        bootbox.alert("操作有误！" + o);
+                                    }
+                                });
+
+                            } else {
+                                bootbox.alert("请输入此版本停用备注！");
+                            }
+                        });
+                    }
+                });
+            });
+
+            $('a[name="btnTips"]').on('click', function () {
+                var tid = $(this).data('val');
+                bootbox.alert(tid);
+            });
+
+        });
+    </script>
+}

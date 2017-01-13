@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SpecialEventModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Core_History">
+          <Key>
+            <PropertyRef Name="H_Id" />
+          </Key>
+          <Property Name="H_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="H_Ip" Type="nvarchar" MaxLength="20" />
+          <Property Name="H_UA" Type="nvarchar" MaxLength="50" />
+          <Property Name="H_VillageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="H_VillageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="H_Time" Type="datetime" />
+          <Property Name="H_Source" Type="int" Nullable="false" />
+          <Property Name="H_Notes" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Core_Statistics">
+          <Key>
+            <PropertyRef Name="S_Id" />
+          </Key>
+          <Property Name="S_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="S_Votes" Type="int" Nullable="false" />
+          <Property Name="S_VillageCount" Type="int" Nullable="false" />
+          <Property Name="S_Views" Type="int" Nullable="false" />
+          <Property Name="S_Remark" Type="nvarchar" MaxLength="50" />
+          <Property Name="S_Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Core_Village">
+          <Key>
+            <PropertyRef Name="V_Id" />
+          </Key>
+          <Property Name="V_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="V_ChatID" Type="varchar" MaxLength="32" />
+          <Property Name="V_CityName" Type="nvarchar" MaxLength="20" />
+          <Property Name="V_DistrictName" Type="nvarchar" MaxLength="20" />
+          <Property Name="V_BuildingName" Type="nvarchar" MaxLength="80" />
+          <Property Name="V_BuildingCells" Type="int" Nullable="false" />
+          <Property Name="V_BuildingArea" Type="float" Nullable="false" />
+          <Property Name="V_BuildingAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="V_Architecture" Type="nvarchar" MaxLength="50" />
+          <Property Name="V_Property" Type="nvarchar" MaxLength="100" />
+          <Property Name="V_Developers" Type="nvarchar" MaxLength="50" />
+          <Property Name="V_CoordX" Type="float" Nullable="false" />
+          <Property Name="V_CoordY" Type="float" Nullable="false" />
+          <Property Name="V_Consociation" Type="int" Nullable="false" />
+          <Property Name="V_Tags" Type="nvarchar" MaxLength="50" />
+          <Property Name="V_Img" Type="nvarchar" MaxLength="50" />
+          <Property Name="V_Number" Type="int" Nullable="false" />
+          <Property Name="V_Hot" Type="int" Nullable="false" />
+          <Property Name="V_Remark" Type="nvarchar" MaxLength="50" />
+          <Property Name="V_BuildingTime" Type="datetime" />
+          <Property Name="V_Time" Type="datetime" Nullable="false" />
+          <Property Name="V_AreaCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="V_State" Type="int" Nullable="false" />
+          <Property Name="V_Votes" Type="int" Nullable="false" />
+          <Property Name="V_Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Core_VillageApply">
+          <Key>
+            <PropertyRef Name="A_Id" />
+          </Key>
+          <Property Name="A_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="A_WeixinNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="A_WeixinLogo" Type="nvarchar" MaxLength="100" />
+          <Property Name="A_ApplyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="A_CityName" Type="nvarchar" MaxLength="20" />
+          <Property Name="A_DistrictName" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_Time" Type="datetime" Nullable="false" />
+          <Property Name="A_State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Core_VillageVote">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="C_BuildingId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="C_WeixinNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="C_WeixinLogo" Type="nvarchar" MaxLength="100" />
+          <Property Name="C_Time" Type="datetime" Nullable="false" />
+          <Property Name="C_Ip" Type="nvarchar" MaxLength="30" />
+          <Property Name="C_Source" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SpecialEvent.dbo.Sys_Admin”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Sys_Admin">
+          <Key>
+            <PropertyRef Name="A_Id" />
+            <PropertyRef Name="A_Role" />
+            <PropertyRef Name="A_Sex" />
+            <PropertyRef Name="A_Status" />
+            <PropertyRef Name="A_Time" />
+          </Key>
+          <Property Name="A_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="A_Account" Type="nvarchar" MaxLength="20" />
+          <Property Name="A_Pwd" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_EncryptCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="A_Role" Type="int" Nullable="false" />
+          <Property Name="A_Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="A_Sex" Type="int" Nullable="false" />
+          <Property Name="A_Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="A_HeadImg" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_Remark" Type="nvarchar" MaxLength="100" />
+          <Property Name="A_Status" Type="int" Nullable="false" />
+          <Property Name="A_Time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SpecialEvent.dbo.Sys_City”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Sys_City">
+          <Key>
+            <PropertyRef Name="C_PK_ID" />
+            <PropertyRef Name="C_ProvinceID" />
+            <PropertyRef Name="C_Hot" />
+          </Key>
+          <Property Name="C_PK_ID" Type="int" Nullable="false" />
+          <Property Name="C_ProvinceID" Type="int" Nullable="false" />
+          <Property Name="C_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_AreaCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="C_LevelCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_Sort" Type="int" />
+          <Property Name="C_Pinyin" Type="nvarchar" MaxLength="50" />
+          <Property Name="C_Hot" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SpecialEvent.dbo.Sys_District”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Sys_District">
+          <Key>
+            <PropertyRef Name="D_PK_ID" />
+            <PropertyRef Name="D_CityID" />
+          </Key>
+          <Property Name="D_PK_ID" Type="int" Nullable="false" />
+          <Property Name="D_CityID" Type="int" Nullable="false" />
+          <Property Name="D_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="D_PostCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="D_LevelCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="D_Sort" Type="int" />
+          <Property Name="D_Pinyin" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“SpecialEvent.dbo.Sys_Province”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Sys_Province">
+          <Key>
+            <PropertyRef Name="P_PK_ID" />
+            <PropertyRef Name="P_Sort" />
+          </Key>
+          <Property Name="P_PK_ID" Type="int" Nullable="false" />
+          <Property Name="P_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="P_LevelCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="P_Sort" Type="int" Nullable="false" />
+          <Property Name="P_Pinyin" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="SpecialEventModelStoreContainer">
+          <EntitySet Name="Core_History" EntityType="Self.Core_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Core_Statistics" EntityType="Self.Core_Statistics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Core_Village" EntityType="Self.Core_Village" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Core_VillageApply" EntityType="Self.Core_VillageApply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Core_VillageVote" EntityType="Self.Core_VillageVote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_Admin" EntityType="Self.Sys_Admin" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sys_Admin].[A_Id] AS [A_Id], 
+    [Sys_Admin].[A_Account] AS [A_Account], 
+    [Sys_Admin].[A_Pwd] AS [A_Pwd], 
+    [Sys_Admin].[A_EncryptCode] AS [A_EncryptCode], 
+    [Sys_Admin].[A_Role] AS [A_Role], 
+    [Sys_Admin].[A_Name] AS [A_Name], 
+    [Sys_Admin].[A_Sex] AS [A_Sex], 
+    [Sys_Admin].[A_Phone] AS [A_Phone], 
+    [Sys_Admin].[A_HeadImg] AS [A_HeadImg], 
+    [Sys_Admin].[A_Remark] AS [A_Remark], 
+    [Sys_Admin].[A_Status] AS [A_Status], 
+    [Sys_Admin].[A_Time] AS [A_Time]
+    FROM [dbo].[Sys_Admin] AS [Sys_Admin]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Sys_City" EntityType="Self.Sys_City" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sys_City].[C_PK_ID] AS [C_PK_ID], 
+    [Sys_City].[C_ProvinceID] AS [C_ProvinceID], 
+    [Sys_City].[C_Name] AS [C_Name], 
+    [Sys_City].[C_AreaCode] AS [C_AreaCode], 
+    [Sys_City].[C_LevelCode] AS [C_LevelCode], 
+    [Sys_City].[C_Sort] AS [C_Sort], 
+    [Sys_City].[C_Pinyin] AS [C_Pinyin], 
+    [Sys_City].[C_Hot] AS [C_Hot]
+    FROM [dbo].[Sys_City] AS [Sys_City]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Sys_District" EntityType="Self.Sys_District" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sys_District].[D_PK_ID] AS [D_PK_ID], 
+    [Sys_District].[D_CityID] AS [D_CityID], 
+    [Sys_District].[D_Name] AS [D_Name], 
+    [Sys_District].[D_PostCode] AS [D_PostCode], 
+    [Sys_District].[D_LevelCode] AS [D_LevelCode], 
+    [Sys_District].[D_Sort] AS [D_Sort], 
+    [Sys_District].[D_Pinyin] AS [D_Pinyin]
+    FROM [dbo].[Sys_District] AS [Sys_District]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Sys_Province" EntityType="Self.Sys_Province" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sys_Province].[P_PK_ID] AS [P_PK_ID], 
+    [Sys_Province].[P_Name] AS [P_Name], 
+    [Sys_Province].[P_LevelCode] AS [P_LevelCode], 
+    [Sys_Province].[P_Sort] AS [P_Sort], 
+    [Sys_Province].[P_Pinyin] AS [P_Pinyin]
+    FROM [dbo].[Sys_Province] AS [Sys_Province]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpecialEventModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SpecialEventEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Core_Village" EntityType="SpecialEventModel.Core_Village" />
+          <EntitySet Name="Core_VillageApply" EntityType="SpecialEventModel.Core_VillageApply" />
+          <EntitySet Name="Core_VillageVote" EntityType="SpecialEventModel.Core_VillageVote" />
+          <EntitySet Name="Sys_Admin" EntityType="SpecialEventModel.Sys_Admin" />
+          <EntitySet Name="Core_Statistics" EntityType="SpecialEventModel.Core_Statistics" />
+          <EntitySet Name="Sys_City" EntityType="SpecialEventModel.Sys_City" />
+          <EntitySet Name="Sys_District" EntityType="SpecialEventModel.Sys_District" />
+          <EntitySet Name="Sys_Province" EntityType="SpecialEventModel.Sys_Province" />
+          <EntitySet Name="Core_History" EntityType="SpecialEventModel.Core_History" />
+        </EntityContainer>
+        <EntityType Name="Core_Village">
+          <Key>
+            <PropertyRef Name="V_Id" />
+          </Key>
+          <Property Name="V_Id" Type="Guid" Nullable="false" />
+          <Property Name="V_ChatID" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="V_CityName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="V_DistrictName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="V_BuildingName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="V_BuildingCells" Type="Int32" Nullable="false" />
+          <Property Name="V_BuildingArea" Type="Double" Nullable="false" />
+          <Property Name="V_BuildingAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="V_Architecture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="V_Property" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="V_Developers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="V_CoordX" Type="Double" Nullable="false" />
+          <Property Name="V_CoordY" Type="Double" Nullable="false" />
+          <Property Name="V_Consociation" Type="Int32" Nullable="false" />
+          <Property Name="V_Tags" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="V_Img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="V_Number" Type="Int32" Nullable="false" />
+          <Property Name="V_Hot" Type="Int32" Nullable="false" />
+          <Property Name="V_Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="V_BuildingTime" Type="DateTime" Precision="3" />
+          <Property Name="V_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="V_AreaCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="V_State" Type="Int32" Nullable="false" />
+          <Property Name="V_Votes" Type="Int32" Nullable="false" />
+          <Property Name="V_Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Core_VillageApply">
+          <Key>
+            <PropertyRef Name="A_Id" />
+          </Key>
+          <Property Name="A_Id" Type="Guid" Nullable="false" />
+          <Property Name="A_WeixinNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="A_WeixinLogo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="A_ApplyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="A_CityName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="A_DistrictName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="A_State" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Core_VillageVote">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="Guid" Nullable="false" />
+          <Property Name="C_BuildingId" Type="Guid" Nullable="false" />
+          <Property Name="C_WeixinNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="C_WeixinLogo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="C_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C_Ip" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="C_Source" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_Admin">
+          <Key>
+            <PropertyRef Name="A_Id" />
+            <PropertyRef Name="A_Role" />
+            <PropertyRef Name="A_Sex" />
+            <PropertyRef Name="A_Status" />
+            <PropertyRef Name="A_Time" />
+          </Key>
+          <Property Name="A_Id" Type="Guid" Nullable="false" />
+          <Property Name="A_Account" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="A_Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_EncryptCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="A_Role" Type="Int32" Nullable="false" />
+          <Property Name="A_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="A_Sex" Type="Int32" Nullable="false" />
+          <Property Name="A_Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="A_HeadImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="A_Status" Type="Int32" Nullable="false" />
+          <Property Name="A_Time" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Core_Statistics">
+          <Key>
+            <PropertyRef Name="S_Id" />
+          </Key>
+          <Property Name="S_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="S_Votes" Type="Int32" Nullable="false" />
+          <Property Name="S_VillageCount" Type="Int32" Nullable="false" />
+          <Property Name="S_Views" Type="Int32" Nullable="false" />
+          <Property Name="S_Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="S_Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Sys_City">
+          <Key>
+            <PropertyRef Name="C_PK_ID" />
+            <PropertyRef Name="C_ProvinceID" />
+            <PropertyRef Name="C_Hot" />
+          </Key>
+          <Property Name="C_PK_ID" Type="Int32" Nullable="false" />
+          <Property Name="C_ProvinceID" Type="Int32" Nullable="false" />
+          <Property Name="C_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_AreaCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="C_LevelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Sort" Type="Int32" />
+          <Property Name="C_Pinyin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Hot" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sys_District">
+          <Key>
+            <PropertyRef Name="D_PK_ID" />
+            <PropertyRef Name="D_CityID" />
+          </Key>
+          <Property Name="D_PK_ID" Type="Int32" Nullable="false" />
+          <Property Name="D_CityID" Type="Int32" Nullable="false" />
+          <Property Name="D_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="D_PostCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="D_LevelCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="D_Sort" Type="Int32" />
+          <Property Name="D_Pinyin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sys_Province">
+          <Key>
+            <PropertyRef Name="P_PK_ID" />
+            <PropertyRef Name="P_Sort" />
+          </Key>
+          <Property Name="P_PK_ID" Type="Int32" Nullable="false" />
+          <Property Name="P_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="P_LevelCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="P_Sort" Type="Int32" Nullable="false" />
+          <Property Name="P_Pinyin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Core_History">
+          <Key>
+            <PropertyRef Name="H_Id" />
+          </Key>
+          <Property Name="H_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="H_Ip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="H_UA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="H_VillageId" Type="Guid" Nullable="false" />
+          <Property Name="H_VillageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="H_Time" Type="DateTime" Precision="3" />
+          <Property Name="H_Source" Type="Int32" Nullable="false" />
+          <Property Name="H_Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpecialEventModelStoreContainer" CdmEntityContainer="SpecialEventEntities">
+          <EntitySetMapping Name="Core_Village">
+            <EntityTypeMapping TypeName="SpecialEventModel.Core_Village">
+              <MappingFragment StoreEntitySet="Core_Village">
+                <ScalarProperty Name="V_Timestamp" ColumnName="V_Timestamp" />
+                <ScalarProperty Name="V_Votes" ColumnName="V_Votes" />
+                <ScalarProperty Name="V_State" ColumnName="V_State" />
+                <ScalarProperty Name="V_AreaCode" ColumnName="V_AreaCode" />
+                <ScalarProperty Name="V_Time" ColumnName="V_Time" />
+                <ScalarProperty Name="V_BuildingTime" ColumnName="V_BuildingTime" />
+                <ScalarProperty Name="V_Remark" ColumnName="V_Remark" />
+                <ScalarProperty Name="V_Hot" ColumnName="V_Hot" />
+                <ScalarProperty Name="V_Number" ColumnName="V_Number" />
+                <ScalarProperty Name="V_Img" ColumnName="V_Img" />
+                <ScalarProperty Name="V_Tags" ColumnName="V_Tags" />
+                <ScalarProperty Name="V_Consociation" ColumnName="V_Consociation" />
+                <ScalarProperty Name="V_CoordY" ColumnName="V_CoordY" />
+                <ScalarProperty Name="V_CoordX" ColumnName="V_CoordX" />
+                <ScalarProperty Name="V_Developers" ColumnName="V_Developers" />
+                <ScalarProperty Name="V_Property" ColumnName="V_Property" />
+                <ScalarProperty Name="V_Architecture" ColumnName="V_Architecture" />
+                <ScalarProperty Name="V_BuildingAddress" ColumnName="V_BuildingAddress" />
+                <ScalarProperty Name="V_BuildingArea" ColumnName="V_BuildingArea" />
+                <ScalarProperty Name="V_BuildingCells" ColumnName="V_BuildingCells" />
+                <ScalarProperty Name="V_BuildingName" ColumnName="V_BuildingName" />
+                <ScalarProperty Name="V_DistrictName" ColumnName="V_DistrictName" />
+                <ScalarProperty Name="V_CityName" ColumnName="V_CityName" />
+                <ScalarProperty Name="V_ChatID" ColumnName="V_ChatID" />
+                <ScalarProperty Name="V_Id" ColumnName="V_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Core_VillageApply">
+            <EntityTypeMapping TypeName="SpecialEventModel.Core_VillageApply">
+              <MappingFragment StoreEntitySet="Core_VillageApply">
+                <ScalarProperty Name="A_State" ColumnName="A_State" />
+                <ScalarProperty Name="A_Time" ColumnName="A_Time" />
+                <ScalarProperty Name="A_DistrictName" ColumnName="A_DistrictName" />
+                <ScalarProperty Name="A_CityName" ColumnName="A_CityName" />
+                <ScalarProperty Name="A_ApplyName" ColumnName="A_ApplyName" />
+                <ScalarProperty Name="A_WeixinLogo" ColumnName="A_WeixinLogo" />
+                <ScalarProperty Name="A_WeixinNo" ColumnName="A_WeixinNo" />
+                <ScalarProperty Name="A_Id" ColumnName="A_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Core_VillageVote">
+            <EntityTypeMapping TypeName="SpecialEventModel.Core_VillageVote">
+              <MappingFragment StoreEntitySet="Core_VillageVote">
+                <ScalarProperty Name="C_Source" ColumnName="C_Source" />
+                <ScalarProperty Name="C_Ip" ColumnName="C_Ip" />
+                <ScalarProperty Name="C_Time" ColumnName="C_Time" />
+                <ScalarProperty Name="C_WeixinLogo" ColumnName="C_WeixinLogo" />
+                <ScalarProperty Name="C_WeixinNo" ColumnName="C_WeixinNo" />
+                <ScalarProperty Name="C_BuildingId" ColumnName="C_BuildingId" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_Admin">
+            <EntityTypeMapping TypeName="SpecialEventModel.Sys_Admin">
+              <MappingFragment StoreEntitySet="Sys_Admin">
+                <ScalarProperty Name="A_Time" ColumnName="A_Time" />
+                <ScalarProperty Name="A_Status" ColumnName="A_Status" />
+                <ScalarProperty Name="A_Remark" ColumnName="A_Remark" />
+                <ScalarProperty Name="A_HeadImg" ColumnName="A_HeadImg" />
+                <ScalarProperty Name="A_Phone" ColumnName="A_Phone" />
+                <ScalarProperty Name="A_Sex" ColumnName="A_Sex" />
+                <ScalarProperty Name="A_Name" ColumnName="A_Name" />
+                <ScalarProperty Name="A_Role" ColumnName="A_Role" />
+                <ScalarProperty Name="A_EncryptCode" ColumnName="A_EncryptCode" />
+                <ScalarProperty Name="A_Pwd" ColumnName="A_Pwd" />
+                <ScalarProperty Name="A_Account" ColumnName="A_Account" />
+                <ScalarProperty Name="A_Id" ColumnName="A_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Core_Statistics">
+            <EntityTypeMapping TypeName="SpecialEventModel.Core_Statistics">
+              <MappingFragment StoreEntitySet="Core_Statistics">
+                <ScalarProperty Name="S_Timestamp" ColumnName="S_Timestamp" />
+                <ScalarProperty Name="S_Remark" ColumnName="S_Remark" />
+                <ScalarProperty Name="S_Views" ColumnName="S_Views" />
+                <ScalarProperty Name="S_VillageCount" ColumnName="S_VillageCount" />
+                <ScalarProperty Name="S_Votes" ColumnName="S_Votes" />
+                <ScalarProperty Name="S_Id" ColumnName="S_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_City">
+            <EntityTypeMapping TypeName="SpecialEventModel.Sys_City">
+              <MappingFragment StoreEntitySet="Sys_City">
+                <ScalarProperty Name="C_Hot" ColumnName="C_Hot" />
+                <ScalarProperty Name="C_Pinyin" ColumnName="C_Pinyin" />
+                <ScalarProperty Name="C_Sort" ColumnName="C_Sort" />
+                <ScalarProperty Name="C_LevelCode" ColumnName="C_LevelCode" />
+                <ScalarProperty Name="C_AreaCode" ColumnName="C_AreaCode" />
+                <ScalarProperty Name="C_Name" ColumnName="C_Name" />
+                <ScalarProperty Name="C_ProvinceID" ColumnName="C_ProvinceID" />
+                <ScalarProperty Name="C_PK_ID" ColumnName="C_PK_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_District">
+            <EntityTypeMapping TypeName="SpecialEventModel.Sys_District">
+              <MappingFragment StoreEntitySet="Sys_District">
+                <ScalarProperty Name="D_Pinyin" ColumnName="D_Pinyin" />
+                <ScalarProperty Name="D_Sort" ColumnName="D_Sort" />
+                <ScalarProperty Name="D_LevelCode" ColumnName="D_LevelCode" />
+                <ScalarProperty Name="D_PostCode" ColumnName="D_PostCode" />
+                <ScalarProperty Name="D_Name" ColumnName="D_Name" />
+                <ScalarProperty Name="D_CityID" ColumnName="D_CityID" />
+                <ScalarProperty Name="D_PK_ID" ColumnName="D_PK_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_Province">
+            <EntityTypeMapping TypeName="SpecialEventModel.Sys_Province">
+              <MappingFragment StoreEntitySet="Sys_Province">
+                <ScalarProperty Name="P_Pinyin" ColumnName="P_Pinyin" />
+                <ScalarProperty Name="P_Sort" ColumnName="P_Sort" />
+                <ScalarProperty Name="P_LevelCode" ColumnName="P_LevelCode" />
+                <ScalarProperty Name="P_Name" ColumnName="P_Name" />
+                <ScalarProperty Name="P_PK_ID" ColumnName="P_PK_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Core_History">
+            <EntityTypeMapping TypeName="SpecialEventModel.Core_History">
+              <MappingFragment StoreEntitySet="Core_History">
+                <ScalarProperty Name="H_Notes" ColumnName="H_Notes" />
+                <ScalarProperty Name="H_Source" ColumnName="H_Source" />
+                <ScalarProperty Name="H_Time" ColumnName="H_Time" />
+                <ScalarProperty Name="H_VillageName" ColumnName="H_VillageName" />
+                <ScalarProperty Name="H_VillageId" ColumnName="H_VillageId" />
+                <ScalarProperty Name="H_UA" ColumnName="H_UA" />
+                <ScalarProperty Name="H_Ip" ColumnName="H_Ip" />
+                <ScalarProperty Name="H_Id" ColumnName="H_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

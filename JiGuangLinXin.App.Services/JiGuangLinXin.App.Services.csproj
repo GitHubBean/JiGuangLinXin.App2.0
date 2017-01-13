@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{012BCE04-1AB7-4946-923B-7210C987CF80}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JiGuangLinXin.App.Services</RootNamespace>
+    <AssemblyName>JiGuangLinXin.App.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="jpush-api, Version=1.0.0.34657, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\jpush-api.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="alipay-mobile\AlipayConfig.cs" />
+    <Compile Include="alipay-mobile\AlipayCore.cs" />
+    <Compile Include="alipay-mobile\AlipayNotify.cs" />
+    <Compile Include="alipay-mobile\RSA.cs" />
+    <Compile Include="alipay\AlipayConfig.cs" />
+    <Compile Include="alipay\AlipayCore.cs" />
+    <Compile Include="alipay\AlipayNotify.cs" />
+    <Compile Include="alipay\AlipaySubmit.cs" />
+    <Compile Include="chinapay\Base64.cs" />
+    <Compile Include="chinapay\ByteTool.cs" />
+    <Compile Include="chinapay\DES.cs" />
+    <Compile Include="chinapay\MACVerify.cs" />
+    <Compile Include="chinapay\MD5.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="huanxin\EaseMobDemo.cs" />
+    <Compile Include="huanxin\HuanXin.cs" />
+    <Compile Include="juhe\Juhe.cs" />
+    <Compile Include="alipay\MD5.cs" />
+    <Compile Include="phonemsg\PhoneMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendURL.cs" />
+    <Compile Include="jpush\Tuisong.cs" />
+    <Compile Include="weixin\DynamicJson.cs" />
+    <Compile Include="weixin\BasicAPI.cs" />
+    <Compile Include="weixin\TokenHelper.cs" />
+    <Compile Include="weixin\JSSDK.cs" />
+    <Compile Include="weixin\UserAdminAPI.cs" />
+    <Compile Include="weixin\Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JiGuangLinXin.App.Entities\JiGuangLinXin.App.Entities.csproj">
+      <Project>{3bae5bc5-9cd7-47b3-8c6e-5b666ee8e5f4}</Project>
+      <Name>JiGuangLinXin.App.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiGuangLinXin.App.Log\JiGuangLinXin.App.Log.csproj">
+      <Project>{4fef4012-8ce2-488b-b478-90125ec083f0}</Project>
+      <Name>JiGuangLinXin.App.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiGuangLinXin.App.Provide\JiGuangLinXin.App.Provide.csproj">
+      <Project>{dfaafe40-1c4c-45d9-9529-c81724c09b5c}</Project>
+      <Name>JiGuangLinXin.App.Provide</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

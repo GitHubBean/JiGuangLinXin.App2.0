@@ -1,0 +1,159 @@
+﻿@model PagedList<Core_Business>
+@{
+    ViewBag.ParentUrl = "/Business/Index";
+    ViewBag.Title = "商家管理";
+
+    List<Core_LifestyleType> typeList = ViewBag.TypeList as List<Core_LifestyleType>;
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">控制台</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">检索/管理全平台商家</a>
+            </h4>
+            <div class="hr hr-18 dotted hr-double"></div>
+            <div class="nav-search" id="nav-search" style="top: 6px;">
+                <form class="form-search">
+                    <span class="">
+                        <input type="text" placeholder="商家昵称/电话号码 关键字搜索" class="nav-search-input col-xs-10 col-sm-5" style="width: 280px;" id="key" name="key" value="@Request.QueryString["key"]">
+                    </span>
+                    <button type="submit" class="btn btn-info btn-xs">
+                        <i class="ace-icon fa fa-search bigger-110"></i>
+                        搜索
+                    </button>
+                </form>
+            </div><!-- #nav-search -->
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>电话</th>
+                        <th>昵称</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>类别</th>
+                        <th>服务小区数量</th>
+                        <th>状态</th>
+                        <th>入驻时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.B_LoginPhone</td>
+                            <td>@obj.B_NickName</td>
+                            <td>@obj.B_TrueName</td>
+
+                            <td>
+                                @if (obj.B_Sex == (int)SexEnum.男)
+                                {
+                                    <span class="label label-info">男</span>
+                                }
+                                else if (obj.B_Sex == (int)SexEnum.不详)
+                                {
+                                    <span class="label">未设置</span>
+
+                                }
+                                else if (obj.B_Sex == (int)SexEnum.女)
+                                {
+                                    <span class="label label-success">女</span>
+                                }
+
+                            </td>
+                            <td>
+                                @{
+                                var tn = "暂无分类";
+                                var tem = typeList.FirstOrDefault(o => o.T_Id == obj.B_Category);
+                                if (tem != null)
+                                {
+                                    tn = tem.T_Title;
+                                }
+                                @tn
+
+                                }
+                            </td>
+                            <td>@obj.B_VillageCount</td>
+                            <td>
+                                @if (obj.B_Status == (int)UserStatusEnum.正常)
+                                {
+                                    <span class="label label-success">正常</span>
+                                }
+                                else if (obj.B_Status == (int)UserStatusEnum.冻结)
+                                {
+                                    <span class="label label-important">已冻结</span>
+
+                                }
+                                else if (obj.B_Status == (int)UserStatusEnum.禁言)
+                                {
+                                    <span class="label label-danger">已禁言</span>
+                                }
+                            </td>
+
+                            <td>@obj.B_RegisterDate</td>
+                            <td>
+                                @if (obj.B_Status == (int)UserStatusEnum.冻结)
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-success tooltip-success" data-rel="tooltip" data-placement="top" title="解冻帐号" href="###" data-val="@obj.B_Id" name="btnOption">
+                                            解冻
+                                            <i class="ace-icon fa fa-unlock bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }
+                                else if (obj.B_Status == (int)UserStatusEnum.正常)
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-danger tooltip-error" data-rel="tooltip" data-placement="top" title="冻结帐号" href="###" data-val="@obj.B_Id" name="btnOption">
+                                            冻结
+                                            <i class="ace-icon fa fa-lock bigger-120"></i>
+                                        </a>
+                                    </div>
+
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "pn", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //审核不通过
+            $('a[name="btnOption"]').on('click', function () {
+                $.post('/Business/Forzen', { id: $(this).data('val') }, function (o) {
+                    //alert(o.Msg);
+                    if ('ok' == o) {
+                        bootbox.alert("操作成功！", function () {
+                            //window.location.reload();
+                            location.reload();
+                        });
+                    } else {
+                        bootbox.alert("操作有误！");
+                    }
+                });
+            });
+        });
+    </script>
+}

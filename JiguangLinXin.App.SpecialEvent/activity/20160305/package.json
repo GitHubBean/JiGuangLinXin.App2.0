@@ -1,0 +1,41 @@
+{
+  "name": "jglx-weixin-activity",
+  "version": "0.0.1",
+  "entry": {
+    "index": "./src/entry/index.jsx"
+  },
+  "dependencies": {
+    "atool-build": "0.5.x",
+    "babel-plugin-antd": "^0.2.0",
+    "es3ify-loader": "^0.1.0",
+    "fastclick": "^1.0.6",
+    "react": "~0.14.7",
+    "react-dom": "~0.14.7",
+    "skui-touch": "0.0.x",
+    "store2": "^2.3.2"
+  },
+  "devDependencies": {
+    "dora": "0.2.x",
+    "dora-plugin-atool-build": "0.4.x",
+    "dora-plugin-hmr": "0.3.x",
+    "dora-plugin-proxy": "0.5.x",
+    "eslint": "1.10.x",
+    "eslint-config-airbnb": "4.0.x",
+    "eslint-plugin-react": "3.16.x",
+    "gulp": "3.9.x",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-base64": "^0.1.3",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-sass": "2.2.x",
+    "pre-commit": "1.x"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "scripts": {
+    "dev": "dora -p 8001 --plugins atool-build,hmr",
+    "lint": "eslint --ext .js,.jsx src",
+    "buildDev": "atool-build --no-compress -w-o ./dist/",
+    "build": "atool-build -o ./dist/"
+  }
+}

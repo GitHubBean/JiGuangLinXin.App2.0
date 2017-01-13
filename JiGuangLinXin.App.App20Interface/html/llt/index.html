@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>邻里团分享</title>
+  <meta name="renderer" content="webkit">
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="format-detection" content="email=no"/>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+<div class='header' id='header'>
+  <img src="img/header.png" width='100%'>
+</div>
+<div class='body' id='body' >
+  <div class='frame'>
+    <div class='proImgBox'>
+      <img class='img' id="frame" src="img/frame.png" width='90%'/>
+      <div class='proImg' v-bind:style="img"></div>
+    </div>
+    <div class='proname' v-cloak>{{proname}}</div>
+    <div class='price' v-cloak>￥{{price}}</div>
+    <a class="join" href='http://www.jgyx.com/AppDownload/'>我要参团</a>
+  </div>
+</div>
+<!--<script src='js/zepto.min.js'></script>-->
+<!--<script src='js/fastclick.min.js'></script>-->
+<!--<script src='js/vue.js'></script>-->
+<script src="build/main.min.js"></script>
+<script type="text/javascript">
+  document.body.addEventListener('touchstart', function () {
+  });
+  function param(key) {
+    var url = location.search.replace(/^\?/, '').split('&');
+    var paramsObj = {};
+    for (var i = 0, iLen = url.length; i < iLen; i++) {
+      var param = url[i].split('=');
+      paramsObj[param[0]] = param[1];
+    }
+    if (key) {
+      return decodeURI(paramsObj[key]) || '';
+    }
+    return paramsObj;
+  };
+  $(function () {
+    FastClick.attach(document.body);
+//    var frame = $('#frame');
+//    var frameWidth = $('#frame').width();
+//    var frameHeight = $('#frame').height();
+//    var imgWidth = frameWidth * 0.81;
+//    var imgHeight = frameHeight * 0.7;
+//    var imgTop = frameHeight * 0.19;
+//    console.log(frameHeight)
+    $.ajax({
+      type: "post",
+      url: '/lx/' + 'H5ShareInterface/GroupbuyDetail',
+      data: {
+        'gId': param('gid')
+      },
+      success: function (result) {
+//        console.log(result)
+        if (result.State === 0) {
+          new Vue({
+            el: '#body',
+            data: {
+              proname: result.Data.title,
+              price: result.Data.price,
+              img: {
+                'background': 'url(' + result.Data.img + ') no-repeat 50%',
+                'background-size': 'cover',
+//                'width': imgWidth + 'px',
+//                'height': imgHeight + 'px',
+//                'top': imgTop + 'px'
+              }
+            }
+          })
+        }
+
+      },
+      error: function () {
+        alert('网络异常');
+      }
+    })
+  });
+</script>
+
+</body>
+
+</html>

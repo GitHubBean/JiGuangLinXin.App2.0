@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "补款/补积分";
+    ViewBag.ParentUrl = "/Refund/Edit";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.Action("Index","Console")">控制台</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Refund")">退款记录</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+
+<div class="col-sm-10">
+    <form class="form-horizontal" id="frm" action="/Refund/Edit" method="POST">
+        <div class="tabbable">
+            <ul class="nav nav-tabs padding-16">
+                <li class="active">
+                    <a href="###">
+                        <i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+                        新增退款信息
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content profile-edit-tab-content">
+                <div id="edit-basic" class="tab-pane in active">
+
+                    <h4 class="header blue bolder smaller">
+                        基本信息
+                    </h4>
+                    <div class="space-4"></div>
+                    <input type="hidden" id="uid" name="uid" required data-key="检索" data-target="uQuery" />
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="uQuery">业主信息</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control search-query" id="uQuery" name="uQuery" placeholder="手机、昵称（全字匹配）" required="required" data_max="20" data_min="0">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-purple btn-sm" id="btnQuery">
+                                        查询
+                                        <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <span class="help-block" id="userTips"></span>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="uNum">数额</label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                @Html.TextBox("uNum", null, new { placeholder = "退款金额、积分数量", required = "required", min = "0",type="number" })
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">标识</label>
+
+                        <div class="col-sm-9">
+                            <label class="inline">
+                                <input name="uFlag" type="radio" class="ace" value="0" />
+                                <span class="lbl middle"> 余额</span>
+                            </label>
+
+                            &nbsp; &nbsp; &nbsp;
+
+                            <label class="inline">
+                                <input name="uFlag" type="radio" class="ace" value="1" />
+                                <span class="lbl middle"> 积分</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="uBillId">账单编号</label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                @Html.TextBox("uBillId", null, new { placeholder = "账单记录编号", required = "required" })
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="uRemark">备注</label>
+
+                        <div class="col-sm-9">
+                            @Html.TextArea("uRemark", null, new { @class = "col-xs-12 col-sm-10", placeholder = "备注，退款说明" })
+                        </div>
+                    </div>
+                    <hr />
+
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit" id="btnSubmit">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    确定退款
+                </button>
+
+                &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    取消
+                </button>
+                &nbsp;
+                @if (!string.IsNullOrEmpty(ViewBag.tips))
+                {
+                    <code>@ViewBag.tips</code>
+                }
+            </div>
+        </div>
+    </form>
+</div><!-- /.span -->
+@section footerScript
+{
+    <!--标签tag插件-->
+    <script src="/assets/js/validation/jquery-html5Validate.js"></script>
+}
+@section footer
+{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        $("#frm").html5Validate(function() {
+            this.submit();
+        }, {
+        
+        });
+
+        $(function() {
+            $('#btnQuery').click(function() {
+                var title = $('#uQuery').val();
+                if (title == '') {
+                    bootbox.alert("请输入业主具体查询条件", function() {
+                        $('#uQuery').focus();
+                    });
+                    return;
+                }
+
+                $.post('/Refund/QueryUser', { con: title }, function (o) {
+                    //alert(o.Msg);
+                    if ('err' == o) {
+                        $('#userTips').html('');
+                        $('#uid').val('');
+                        bootbox.alert("数据有误！");
+                    } else {
+                        var info = eval(o);
+                        $('#userTips').html(info.U_NickName + ":" + info.U_LoginPhone);
+                        $('#uid').val(info.U_Id);
+                    }
+                });
+            });
+        });
+    </script>
+}

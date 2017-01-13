@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3BAE5BC5-9CD7-47B3-8C6E-5B666EE8E5F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JiGuangLinXin.App.Entities</RootNamespace>
+    <AssemblyName>JiGuangLinXin.App.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.Extended">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net40\EntityFramework.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseEnum\BaseEnum.cs" />
+    <Compile Include="BaseRepository.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Core_Activity.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ActivityApply.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ActivityGoods.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ActivityGoodsOrder.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Ad.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_AlipayOrder.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_AuditingCash.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_AuditingGroupMananger.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_AuditingVillage.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Balance.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Billboard.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_BillMember.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_BuidingCube.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Building.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_BuildingActivity.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_BuildingType.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_BusDeveloper.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Business.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_BusinessEnteringApply.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_BusinessVillage.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ChinapayDept.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ChinapayOrder.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ChinapayOrder_bk.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Comments.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_DeliveryAddress.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Event.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_EventApply.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_EventGatherLike.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_EventJoinHistory.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_EventScope.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_EventVoteItem.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Feedback.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_GroupAlbum.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_GroupAlbumPic.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_GroupBuy.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_GroupBuyOrder.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_GroupBuyScope.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_GroupBuyType.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_GroupBuyVillage.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Hotline.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Interactive.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Invite.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_InviteApply.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_InviteGroup.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_InviteReply.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_JuheDept.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_JuheOrder.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_LifestyleOrder.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_LifestyleServices.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_LifestyleServicesLike.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_LifestyleType.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Likes.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_LuckyGift.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_LuckyGiftBackOrder.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_LuckyGiftDetail.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_LuckyGiftHistory.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_MallGoods.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_MallOrder.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_MallOrderDetail.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_MallType.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_MalShoppingCar.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_OwnerCardHistory.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Prize.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_PrizeDetail.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Score.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ScoreExchange.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ScoreHistory.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Showcase.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_ShowcaseScope.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Topic.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_TopicMovieTicket.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_User.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_UserFriend.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_UserFriendsApply.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_Village.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_VillageLinxin.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_VoucherCard.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_VoucherCardHistory.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core_VoucherCardPost.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JiGuangLinXinApp.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JiGuangLinXinApp.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JiGuangLinXinApp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JiGuangLinXinApp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JiGuangLinXinApp.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesModel\ChinapayQueryModel.cs" />
+    <Compile Include="ServicesModel\EmojiModel.cs" />
+    <Compile Include="ServicesModel\JPushMsgModel.cs" />
+    <Compile Include="ServicesModel\Juhe.cs" />
+    <Compile Include="ServicesModel\MessageInfo.cs" />
+    <Compile Include="ServicesModel\ReturnInfo.cs" />
+    <Compile Include="Sys_Admin.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_AdSystem.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_AppVersion.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Attachment.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_BaseInfo.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_BillMaster.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_CheckHistory.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_City.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DbErrorLog.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_DiscountRate.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_District.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_ErrorLog.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_IndexRecommend.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_JPushMessage.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Message.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_MessageCenter.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Notice.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_OperateLog.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_OwnerCard.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_OwnerCardCode.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Province.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\BuildingViewModel.cs" />
+    <Compile Include="ViewModel\CellphoneTrafficViewModel.cs" />
+    <Compile Include="ViewModel\EventVoteHistoryViewModel.cs" />
+    <Compile Include="ViewModel\GroupbuyViewModel.cs" />
+    <Compile Include="ViewModel\NearbyLinyouViewModel.cs" />
+    <Compile Include="ViewModel\ConvenientViewModel.cs" />
+    <Compile Include="ViewModel\MallGoodsViewModel.cs" />
+    <Compile Include="ViewModel\UserFriendViewModel.cs" />
+    <Compile Include="ViewModel\ActiveIndexViewModel.cs" />
+    <Compile Include="ViewModel\EventIndexViewModel.cs" />
+    <Compile Include="ViewModel\ResultMessageViewModel.cs" />
+    <Compile Include="ViewModel\TopicIndexViewModel.cs" />
+    <Compile Include="view_businessService.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_event.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_receiveGiftList.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_shoppingCar.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_topicTicketHistory.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_topicTicketReceive.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_topicTicketSend.cs">
+      <DependentUpon>JiGuangLinXinApp.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="JiGuangLinXinApp.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>JiGuangLinXinApp.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="JiGuangLinXinApp.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JiGuangLinXinApp.edmx</DependentUpon>
+      <LastGenOutput>JiGuangLinXinApp.Context.cs</LastGenOutput>
+    </None>
+    <None Include="JiGuangLinXinApp.edmx.diagram">
+      <DependentUpon>JiGuangLinXinApp.edmx</DependentUpon>
+    </None>
+    <None Include="JiGuangLinXinApp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JiGuangLinXinApp.edmx</DependentUpon>
+      <LastGenOutput>JiGuangLinXinApp.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

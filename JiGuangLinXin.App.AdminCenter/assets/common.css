@@ -1,0 +1,180 @@
+﻿@charset "utf-8";
+
+body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+    font-family: Microsoft YaHei,'宋体', Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
+    margin-right: 0px;
+}
+td.middle{vertical-align: middle;}
+/**laydate日期插件 重写样式**/
+.laydate_box, .laydate_box * {
+    box-sizing: content-box;
+}
+
+.laydate_body .laydate_box input[readonly] {
+    background-color: #fff;
+}
+
+input.laydate-icon, div.laydate-icon {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+div.laydate-icon {
+    text-align: left;
+}
+
+
+/*图集样式*/
+
+.upload_image_wrapper {
+    float: left;
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin-left: 4px;
+}
+
+    .upload_image_wrapper a.del {
+        position: absolute;
+        right: 0px;
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: red;
+        text-indent: -9999px;
+        z-index: 1001;
+        background: url(/assets/js/jquery-uploadify/images/btn_del.png) 0px 0px;
+    }
+
+        .upload_image_wrapper a.del:hover {
+            position: absolute;
+            right: 0px;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: red;
+            text-indent: -9999px;
+            z-index: 1001;
+            background: url(/assets/js/jquery-uploadify/images/btn_del.png) 0px -20px;
+        }
+
+    .upload_image_wrapper a.ins {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: red;
+        text-indent: -9999px;
+        z-index: 1001;
+        background: url(/assets/js/jquery-uploadify/images/btn_ins.png) 0px 0px;
+    }
+
+        .upload_image_wrapper a.ins:hover {
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: red;
+            text-indent: -9999px;
+            z-index: 1001;
+            background: url(/assets/js/jquery-uploadify/images/btn_ins.png) 0px -20px;
+        }
+
+    .upload_image_wrapper img {
+        position: absolute;
+        display: block;
+        width: 60px;
+        height: 60px;
+        z-index: 1000;
+    }
+
+.uploadifyQueueItem {
+	font: 11px Verdana, Geneva, sans-serif;
+	border: 2px solid #E5E5E5;
+	background-color: #F5F5F5;
+	margin-top: 5px;
+	padding: 10px;
+	width: 350px;
+}
+.uploadifyError {
+	border: 2px solid #FBCBBC !important;
+	background-color: #FDE5DD !important;
+}
+.uploadifyQueueItem .cancel {
+	float: right;
+}
+.uploadifyProgress {
+	background-color: #FFFFFF;
+	border-top: 1px solid #808080;
+	border-left: 1px solid #808080;
+	border-right: 1px solid #C5C5C5;
+	border-bottom: 1px solid #C5C5C5;
+	margin-top: 10px;
+	width: 100%;
+}
+.uploadifyProgressBar {
+	background-color: #0099FF;
+	width: 1px;
+	height: 3px;
+}
+
+
+#file-list
+        {
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+        #file-list .file-invalid
+        {
+            cursor: pointer;
+            color: #514721;
+            padding-left: 48px;
+            line-height: 24px;
+            background: url(/assets/js/jquery-uploadify/images/error.png) no-repeat 24px 5px;
+            margin-bottom: 1px;
+        }
+        #file-list .file-invalid span
+        {
+            background-color: #fff6bf;
+            padding: 1px;
+        }
+        #file-list .file
+        {
+            line-height: 2em;
+            padding-left: 12px;
+            background: url(/assets/js/jquery-uploadify/images/attach.png) no-repeat 1px 50%;
+            vertical-align: middle;
+        }
+        #file-list .file span, #file-list .file a
+        {
+            padding: 0 4px;
+        }
+        #file-list .file .file-size
+        {
+            color: #666;
+        }
+        #file-list .file .file-error
+        {
+            color: #8a1f11;
+        }

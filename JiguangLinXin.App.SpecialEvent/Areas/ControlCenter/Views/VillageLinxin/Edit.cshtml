@@ -1,0 +1,436 @@
+﻿@model Core_Village
+@{
+    ViewBag.ParentUrl = "/CP/VillageLinxin/Edit";
+    ViewBag.Title = "编辑小区";
+}
+@section header{
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li>
+            <a href="/VillageLinxin/Index">小区管理</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="col-sm-10">
+    <form class="form-horizontal" id="frm" action="/VillageLinxin/Edit" method="POST">
+        <div class="tabbable">
+            <ul class="nav nav-tabs padding-16">
+                <li class="active">
+                    <a data-toggle="tab" href="#edit-basic">
+                        <i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+                        基本信息
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#edit-settings">
+                        <i class="blue ace-icon fa fa-list bigger-125"></i>
+                        备注
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content profile-edit-tab-content">
+                <div id="edit-basic" class="tab-pane in active">
+                    <h4 class="header blue bolder smaller">
+                        基本信息
+                        <small id="uploadTips">
+                        </small>
+                    </h4>
+                    @Html.HiddenFor(o => o.V_Id)
+                    <div class="row">
+                        <!-- 封面、图片 -->
+                        <div class="col-xs-12 col-sm-3 center">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 小区头像 </label>
+                                <div class="col-sm-9" style="text-align:left;">
+                                    <img id="imgV_Img" src="@string.Format("{0}", string.IsNullOrEmpty(Model.V_Img) ? "/static/img/uploadpic.png" : ViewBag.StaticSiteUrl + Model.V_Img)" style="width: 135px;height:113px;" alt="" />
+                                    @Html.HiddenFor(o => o.V_Img)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-9">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="V_BuildingName">小区名</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(o => o.V_BuildingName, new { @class = "col-xs-12 col-sm-10", placeholder = "小区完整名称", required = "required", data_max = "25" })
+                                </div>
+                            </div>
+                            <div class="space-4"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="V_Architecture">小区类型</label>
+
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(o => o.V_Architecture, new { @class = "col-xs-12 col-sm-10", placeholder = "小区定位(如：精品小户)", required = "required", data_max = "50" })
+                                </div>
+                            </div>
+                            <div class="space-4"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="V_BuildingAddress">详细地址</label>
+
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(o => o.V_BuildingAddress, new { @class = "col-xs-12 col-sm-10", placeholder = "小区详细地址", required = "required", data_max = "50" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="V_CityName">所属城市</label>
+
+                        <div class="col-sm-9">
+                            @Html.HiddenFor(o => o.V_CityName)
+                            @Html.HiddenFor(o => o.V_DistrictName)
+                            @Html.HiddenFor(o => o.V_AreaCode)
+                            <div id="cityArea">
+                                @if (string.IsNullOrEmpty(Model.V_CityName))
+                                {
+                                    @Html.DropDownList("province", (IEnumerable<SelectListItem>)TempData["ProvinceList"], new { @class = "col-xs-12 col-sm-3", style = "margin-right:3px;" })
+                                }
+                                else
+                                {
+                                    <code>
+                                        城市： @Model.V_CityName , 区/县： @Model.V_DistrictName
+                                    </code>
+                                    <a href="###" id="btnArea">
+                                        重选区域
+                                    </a>
+                                }
+                            </div>
+                            @*<span class="input-icon input-icon-right">
+    @Html.TextBoxFor(o => o.V_CityName, new { placeholder = "如：重庆市", required = "required" })
+        @Html.DropDownList("Province", (IEnumerable<SelectListItem>)TempData["ProvinceList"], new { @class = "col-xs-12 col-sm-10" })
+
+         @Html.DropDownList("City", (IEnumerable<SelectListItem>)TempData["CityList"], new { @class = "col-xs-12 col-sm-10" })
+                            </span>*@
+                        </div>
+                    </div>
+
+                    @*<div class="space-4"></div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="V_DistrictName">所属区域</label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                @Html.TextBoxFor(o => o.V_DistrictName, new { placeholder = "如：江北区/周边", required = "required" })
+                                @Html.DropDownList("Province", (IEnumerable<SelectListItem>)TempData["ProvinceList"], new { @class = "col-xs-12 col-sm-10" })
+                                    @Html.DropDownList("City", (IEnumerable<SelectListItem>)TempData["CityList"], new { @class = "col-xs-12 col-sm-10" })
+                            </span>
+                        </div>
+                    </div>*@
+
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="V_Tags">附属标签</label>
+
+                        <div class="col-sm-9">
+                            <!-- #section:plugins/input.tag-input -->
+                            @Html.TextBoxFor(o => o.V_Tags, new { @class = "col-xs-12 col-sm-12", placeholder = "如：学区房、精英荟萃" })
+                            <!-- /section:plugins/input.tag-input -->
+                        </div>
+
+                    </div>
+                    <div class="space-4"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="V_BuildingArea">总面积</label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                @Html.TextBoxFor(o => o.V_BuildingArea, new { placeholder = "小区规模，总面积(平方米)", required = "required", type = "number", min = "0" })
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="V_BuildingCells">户数</label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                @Html.TextBoxFor(o => o.V_BuildingCells, new { placeholder = "小区总户数", required = "required", type = "number", min = "0" })
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="V_BuildingTime">开盘时间</label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                @Html.TextBoxFor(o => o.V_BuildingTime, new { placeholder = "小区楼盘开盘时间", @readonly = "" })
+                                <i class="ace-icon fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="V_Property">物业公司</label>
+
+                        <div class="col-sm-9">
+                            <span class="input-icon input-icon-right">
+                                @Html.TextBoxFor(o => o.V_Property, new { placeholder = "小区物业公司" })
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="V_Developers">开发商</label>
+
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(o => o.V_Developers, new { placeholder = "小区开发商", @class = "col-xs-12 col-sm-10" })
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="space"></div>
+                    <h4 class="header blue bolder smaller">标识</h4>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">热门推荐</label>
+
+                        <div class="col-sm-9">
+                            <label class="inline">
+                                <input name="V_Hot" type="radio" class="ace" value="0" />
+                                <span class="lbl middle"> 否</span>
+                            </label>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <label class="inline">
+                                <input name="V_Hot" type="radio" class="ace" value="1" />
+                                <span class="lbl middle"> 是</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">合作小区</label>
+
+                        <div class="col-sm-9">
+                            <label class="inline">
+                                <input name="V_Consociation" type="radio" class="ace" value="0" />
+                                <span class="lbl middle"> 否</span>
+                            </label>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <label class="inline">
+                                <input name="V_Consociation" type="radio" class="ace" value="1" />
+                                <span class="lbl middle"> 是</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">状态</label>
+
+                        <div class="col-sm-9">
+                            <label class="inline">
+                                <input name="V_State" type="radio" class="ace" value="0" />
+                                <span class="lbl middle"> 正常</span>
+                            </label>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <label class="inline">
+                                <input name="V_State" type="radio" class="ace" value="1" />
+                                <span class="lbl middle"> 删除</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-4"></div>
+                </div>
+                <div id="edit-settings" class="tab-pane">
+                    <div class="form-group">
+                        <h4 class="header blue bolder smaller">备注</h4>
+                        <!-- 加载编辑器的容器 -->
+                        @Html.TextAreaFor(o => o.V_Remark, new { @class = "col-xs-12 col-sm-10", placeholder = "备注楼盘信息（如：联系电话等）" })
+                    </div>
+                    <div class="space-8"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit" id="btnSubmit">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    确定并保存
+                </button>
+
+                &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    取消
+                </button>
+            </div>
+        </div>
+    </form>
+</div><!-- /.span -->
+@section footerScript
+{
+    <!--标签tag插件-->
+    <script src="/assets/js/bootstrap-tag.min.js"></script>
+    <script src="/assets/js/validation/jquery-html5Validate.js"></script>
+    <script src="@Url.Content("~/assets/js/file-upload/ajaxupload.js")" type="text/javascript"></script>
+    <script src="/assets/js/laydate/laydate.js"></script>
+    <script src="~/js/common.js"></script>
+}
+@section footer
+{
+    <script>
+        $("#frm").html5Validate(function() {
+
+            if ($('#V_CityName').val() == '') {
+                alert("请选择小区所属的城市");
+                return;
+            }
+            this.submit();
+        }, {
+
+        });
+        /***layDate**/
+        laydate.skin('molv');
+        var start = {
+            elem: '#V_BuildingTime',
+            format: 'YYYY-MM-DD',
+            max: '2099-06-16 23:59:59', //最大日期
+            istime: true,
+            istoday: false
+        };
+        laydate(start);
+        /*上传楼盘封面*/
+        common.ImagesUploadFileFun1('imgV_Img', 'V_Img', 'community');
+
+        $(function() {
+
+            //自定义标签tags
+            var tag_input = $('#V_Tags');
+            try {
+                tag_input.tag(
+                    {
+                        placeholder: tag_input.attr('placeholder'),
+                    }
+                );
+            } catch (e) {
+                //display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+                tag_input.after('<textarea id="' + tag_input.attr('id') + '" name="' + tag_input.attr('name') + '" rows="3">' + tag_input.val() + '</textarea>').remove();
+                //$('#form-field-tags').autosize({append: "\n"});
+            }
+            //自定义标签tags end
+
+
+            //各种状态选中
+            var top = @Model.V_Hot
+            top = top || 0;
+            $('input[name="V_Hot"][value="' + top + '"]').prop("checked", true);
+
+
+            var state = @Model.V_State
+            state = state || 0;
+            $('input[name="V_State"][value="' + state + '"]').prop("checked", true);
+
+
+            var gs = @Model.V_Consociation
+            gs = gs || 0;
+            $('input[name="V_Consociation"][value="' + gs + '"]').prop("checked", true);
+
+
+            //点击省份
+            $(document).on("change", "#province", function(o) {
+                // console.log($('#province').val());
+                $('#city').remove();
+                $('#district').remove();
+                var ele = $('#province');
+                var sel = ele.val();
+                if (sel != "0") {
+                    $.post("/VillageLinxin/GetCityListByProvince", { areaCode: sel }, function(o) {
+                        //console.log(o);
+                        var city = eval(o);
+                        if (city.length > 0) {
+                            var html = '<select id="city" style="margin-right:3px;">';
+                            $.each(city, function(i, o) {
+                                html += '<option value="' + o.Value + '">' + o.Text + '</option>';
+                            });
+                            html += '</select>';
+                            ele.after(html);
+                        }
+                    });
+                }
+            });
+            //点击市区
+            $(document).on("change", "#city", function(o) {
+                $('#district').remove();
+                var ele = $('#city');
+                var sel = ele.val();
+                var text = ele.find("option:selected").text();
+                // console.log(ele.val() + '**'+ele.find("option:selected").text());
+                if (sel != "0") {
+                    $.post("/VillageLinxin/GetDistrictListByCity", { areaCode: sel }, function(o) {
+                        //console.log(o);
+                        var city = eval(o);
+                        if (city.length > 0) {
+                            var html = '<select id="district" style="margin-right:3px;">';
+                            $.each(city, function(i, o) {
+                                html += '<option value="' + o.Value + '">' + o.Text + '</option>';
+                            });
+                            html += '</select>';
+                            ele.after(html);
+                        }
+                    });
+
+                    $('#V_CityName').val(text);
+                    $('#V_AreaCode').val(sel);
+                    $('#V_DistrictName').val(text);
+                } else {
+
+                }
+            });
+
+            //点击市区
+            $(document).on("change", "#district", function(o) {
+                var ele = $('#district');
+                var sel = ele.val();
+                var text = ele.find("option:selected").text();
+                // console.log(ele.val() + '**'+ele.find("option:selected").text());
+                if (sel != "0") {
+                    $('#V_AreaCode').val(sel);
+                    $('#V_DistrictName').val(text);
+                }
+            });
+            $(document).on("click", "#btnArea", function () {
+                $.post("/VillageLinxin/GetAllProvinceList",null, function (o) {
+                    //console.log(o);
+                    var city = eval(o);
+                    if (city.length > 0) {
+                        var html = '<select id="province" name="province" style="margin-right:3px;">';
+                        $.each(city, function (i, o) {
+                            html += '<option value="' + o.Value + '">' + o.Text + '</option>';
+                        });
+                        html += '</select>';
+                        $('#cityArea').html(html);
+                    }
+                });
+            });
+        });
+
+    </script>
+}

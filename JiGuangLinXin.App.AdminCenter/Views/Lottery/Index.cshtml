@@ -1,0 +1,116 @@
+﻿@model PagedList<Core_PrizeDetail>
+@{
+    ViewBag.ParentUrl = "/Lottery/Index";
+    ViewBag.Title = "“星际大冲关”抽奖活动";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+
+            <h4 class="pink">
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                <a href="###" role="button" class="green" data-toggle="modal">抽奖活动时间：07.01-07.31 中奖的业主卡、红包直接累积到用户余额；实体奖品，联系中奖人发货</a>
+            </h4>
+
+            <div class="hr hr-18 dotted hr-double"></div>
+            <!-- PAGE CONTENT BEGINS -->
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>标识</th>
+                        <th>手机号</th>
+                        <th>关卡</th>
+                        <th>奖项</th>
+                        <th>状态</th>
+                        <th>获奖时间</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (Guid.Empty == obj.PD_UId)
+                                {
+                                    <span class="label label-danger">游客</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-success">APP用户</span>
+                                }
+                            </td>
+                            <td>@obj.PD_UPhone</td>
+                            <td>@obj.PD_Round</td>
+                            <td>@obj.PD_Award</td>
+                            <td>
+                                @if (obj.PD_Flag == 0)
+                                {
+
+                                    <span class="label label-important">有抽奖资格，暂未兑奖！</span>
+                                }
+                                else if (obj.PD_Flag == 1)
+                                {
+                                    <span class="label label-success">已经兑奖！</span>
+                                }
+                            </td>
+                            <td>@obj.PD_Time</td>
+                            @*<td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="查看本批次业主卡密" href="/apk/download/@obj.V_Id">
+                                            下载
+                                            <i class="ace-icon fa fa-eye bigger-120"></i>
+                                        </a>
+                                    </div>
+                                </td>*@
+                            <td>
+                                @if (Guid.Empty != obj.PD_UId)
+                                {
+                                    <div class="btn-group">
+                                        <a class="btn btn-xs btn-info tooltip-info" data-rel="tooltip" data-placement="top" title="查看收货地址" href="###" data-val="@obj.PD_UId" name="btnOption">
+                                            查看收货地址
+                                            <i class="ace-icon fa fa-eye bigger-120"></i>
+                                        </a>
+                                    </div>
+                                }
+                                
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @Html.Pager(Model, new PagerOptions { FirstPageText = "首页", PrevPageText = "上一页", NextPageText = "下一页", LastPageText = "末页", PageIndexParameterName = "id", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", Id = "mvcpager" })
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section footer{
+    <script src="/assets/js/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //冻结帐号
+            $('a[name="btnOption"]').on('click', function () {
+                var tid = $(this).data('val');
+               
+
+                $.post('/Lottery/Address', { uid: tid }, function (o) {
+                    bootbox.alert(o);
+                });
+
+            });
+
+        });
+    </script>
+}

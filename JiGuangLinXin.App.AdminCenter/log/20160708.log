@@ -1,0 +1,17 @@
+﻿日志时间：2016/7/8 14:24:10
+日志级别：Error
+日志内容：--【访问地址】:http://192.168.1.172:8125/OwnerCardCode/Build *注：*在执行 controller[OwnerCardCode] 的 action[Build] 时产生异常:【值对于 Int32 太大或太小。】，详情:   在 System.Convert.ToInt32(Double value)
+   在 JiGuangLinXin.App.Provide.StringHelper.CreateRandomStr.GetRandomString(Int32 length, Boolean num) 位置 e:\companyProject\极光邻信App2.0\code\JiGuangLinXin.App2.1\JiGuangLinXin.App2.0\JiGuangLinXin.App.Provide\StringHelper\CreateRandomStr.cs:行号 34
+   在 JiGuangLinXin.App.Core.OwnerCardCodeCore.BatchBuildCardCode(Sys_OwnerCard obj) 位置 e:\companyProject\极光邻信App2.0\code\JiGuangLinXin.App2.1\JiGuangLinXin.App2.0\JiGuangLinXin.App.Core\OwnerCardCodeCore.cs:行号 30
+   在 JiGuangLinXin.App.AdminCenter.Controllers.OwnerCardCodeController.Build(Sys_OwnerCard obj) 位置 e:\companyProject\极光邻信App2.0\code\JiGuangLinXin.App2.1\JiGuangLinXin.App2.0\JiGuangLinXin.App.AdminCenter\Controllers\OwnerCardCodeController.cs:行号 74
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)    ###    【访问来源】:http://192.168.1.172:8125/OwnerCardCode/Build   ###    【访问IP】:192.168.1.172  --------2016/7/8 14:24:09 ##
+******************************

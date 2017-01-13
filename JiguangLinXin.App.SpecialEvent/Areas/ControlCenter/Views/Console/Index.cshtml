@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "控制台首页";
+}
+@section breadcrumb
+{
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="#">首页</a>
+        </li>
+        <li class="active">控制台</li>
+    </ul><!-- .breadcrumb -->
+}
+<div class="alert alert-block alert-success">
+    <button type="button" class="close" data-dismiss="alert">
+        <i class="ace-icon fa fa-times"></i>
+    </button>
+    <i class="ace-icon fa fa-check green"></i>
+    欢迎登录
+    <strong class="green">
+        极光邻信App2.0后台管理系统
+        <small>(v2.0)</small>
+    </strong>,
+    通过此后台将直接操作系统的核心数据，使用前请谨慎确认，谢谢！
+</div>
+<div class="widget-box">
+    <div class="widget-header">
+        <h5 class="bigger lighter">
+            <i class="ace-icon fa fa-briefcase"></i>
+            管理系统
+        </h5>
+    </div>
+    <div class="widget-body">
+        <div class="widget-main">
+            <div class="pull-right" id="dt-list-code">
+                <a target="_blank" href="http://browsehappy.com/">本系统在请使用webkit内核浏览器,如:谷歌浏览器</a>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <table class="">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h4>高效协同</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>智能分析</td>
+                            </tr>
+                            <tr>
+                                <td>全面统计</td>
+                            </tr>
+                            <tr>
+                                <td>稳定可靠</td>
+                            </tr>
+                            <tr>
+                                <td>安全存储</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr></tr>
+                            <tr>
+                                <td>系统版本号:</td>
+                                <td><strong>2.0.0</strong></td>
+                            </tr>
+                            <tr>
+                                <td>浏览器:</td>
+                                <td><strong>@ViewBag.Brower</strong></td>
+                            </tr>
+                            <tr>
+                                <td>操作系统:</td>
+                                <td><strong>@ViewBag.OS</strong></td>
+                            </tr>
+                            <tr>
+                                <td>当前日期:</td>
+                                <td>
+                                    @DateTime.Now.ToShortDateString()
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

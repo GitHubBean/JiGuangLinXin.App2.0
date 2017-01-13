@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>邻信社区中心</title>
+  <meta name="description" itemprop="description" id="description" content="邻信社区中心">
+  <meta name="renderer" content="webkit">
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="format-detection" content="email=no"/>
+  
+  <link rel="stylesheet" href="css/groupCenter.css" />
+  
+<script>window.imgMap = {"groupCenter_sprite.png":1,"logoWrap.png":1,"share.png":1};window.spriteImgSize=[154,122,4];</script><script>window.addEventListener("load",function(){var e=document.querySelectorAll("img"),t=e.length,n=0;for(n=0;n<t;n++)e[n].src=e[n].dataset.src});</script>
+<body class="pageLoader">
+<div style="display: none">
+  
+  <img id="webShareImg" data-src="img/share.png" alt="">
+  
+</div>
+<div class="contentBody" id="contentBody">
+  <div class="pageLoader" id="pageLoader">
+    <div class="square-spin">
+      <div></div>
+    </div>
+  </div>
+  <div class="pageHidden" id="pageHidden">
+    <div id="pageTextHidden" style="visibility: hidden">
+<div class="top" id="top">
+  <img class="banner" id="bgImg" data-src="" width="100%">
+  <div class="header">
+    <div class="title activity">社区活动 <span id="eventCount"></span></div>
+    <div class="title service">社区服务 <span id="lifeCount"></span></div>
+    <div class="logoWrap">
+      <div class="logo" id="communityLogo"></div>
+    </div>
+  </div>
+</div>
+
+<div class="communityPhotos card">
+  <div class="weui_cells weui_cells_access cardHeader">
+    <a class="weui_cell" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.linxin.lx">
+      <div class="weui_cell_bd weui_cell_primary">社区相册(&nbsp;<span class="count" id="albumCount"></span>&nbsp;)</div>
+      <div class="weui_cell_ft">发布/查看更多</div>
+    </a>
+  </div>
+  <div class="photos" id="albumList"></div>
+</div>
+
+<div class="communityPaoPao card">
+  <div class="weui_cells weui_cells_access cardHeader">
+    <a class="weui_cell" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.linxin.lx">
+      <div class="weui_cell_bd weui_cell_primary">社区泡泡(&nbsp;<span class="count" id="interactiveCount"></span>&nbsp;)</div>
+      <div class="weui_cell_ft" >发布/查看更多</div>
+    </a>
+  </div>
+  <div class="photos" id="interactiveList"></div>
+</div>
+
+<div class="neighbor card">
+  <div class="weui_cells weui_cells_access cardHeader">
+    <a class="weui_cell" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.linxin.lx">
+      <div class="weui_cell_bd weui_cell_primary">我的邻居(&nbsp;<span class="count" id="neighborCount"></span>&nbsp;)</div>
+      <div class="weui_cell_ft"></div>
+    </a>
+  </div>
+  <div class="photos" id="neighborList"></div>
+</div>
+
+<div class="notices card">
+  <div class="weui_cells weui_cells_access cardHeader">
+    <a class="weui_cell" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.linxin.lx">
+      <div class="weui_cell_bd weui_cell_primary">社区公告(&nbsp;<span class="count" id="noticeCount"></span>&nbsp;)</div>
+      <div class="weui_cell_ft" >更多社区公告</div>
+    </a>
+  </div>
+  <div class="weui_cells cardBody notice" id="noticeList"></div>
+</div>
+
+<div class="communityTel card">
+  <div class="weui_cells cardHeader">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">社区便捷电话（点击可拨打电话联系）</div>
+      <div class="weui_cell_ft"></div>
+    </div>
+  </div>
+  <div class="weui_cells weui_cells_access cardBody" id="hotline"></div>
+</div>
+
+<div class="communityService card">
+  <div class="weui_cells cardHeader">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">物业服务（点击可拨打电话联系）</div>
+      <div class="weui_cell_ft"></div>
+    </div>
+  </div>
+  <div class="services" id="serviceList"></div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script src="js/groupCenter.js"></script>
+
+</body>
+</html>
